@@ -1,3 +1,4 @@
+```javascript
 const subjectKey = document.body.dataset.subject;
 
 const subjects = {
@@ -23,12 +24,12 @@ const subjects = {
       intro: 'कक्षा ८ का अंग्रेजी नोट्स, व्याकरण नियम र अध्ययन सामग्री।',
 
       resources: [
-        ['०१', 'Question Tags Rules', 'Question Tags का नियम र उदाहरणहरू।', 'documents/english/question-tags-rules.pdf'],
-        ['०२', 'Reporting Verbs – Interrogative Sentences', 'Interrogative sentences का Reporting Verbs।', 'documents/english/reporting-verbs-interrogative.pdf'],
-        ['०३', 'Reporting Verbs – Assertive Sentences', 'Assertive sentences का Reporting Verbs।', 'documents/english/reporting-verbs-assertive.pdf'],
-        ['०४', 'Reporting Verbs – Exclamatory Sentences', 'Exclamatory sentences का Reporting Verbs।', 'documents/english/reporting-verbs-exclamatory.pdf'],
-        ['०५', 'Reporting Verbs – Optative Sentences', 'Optative sentences का Reporting Verbs।', 'documents/english/reporting-verbs-optative.pdf'],
-        ['०६', 'Reporting Verbs – Imperative Sentences', 'Imperative sentences का Reporting Verbs।', 'documents/english/reporting-verbs-imperative.pdf']
+        ['०१', 'Question Tags Rules', 'Question Tags का नियम र उदाहरणहरू।', 'document/english/question-tags-rules.pdf'],
+        ['०२', 'Reporting Verbs – Interrogative Sentences', 'Interrogative sentences का Reporting Verbs।', 'document/english/reporting-verbs-interrogative.pdf'],
+        ['०३', 'Reporting Verbs – Assertive Sentences', 'Assertive sentences का Reporting Verbs।', 'document/english/reporting-verbs-assertive.pdf'],
+        ['०४', 'Reporting Verbs – Exclamatory Sentences', 'Exclamatory sentences का Reporting Verbs।', 'document/english/reporting-verbs-exclamatory.pdf'],
+        ['०५', 'Reporting Verbs – Optative Sentences', 'Optative sentences का Reporting Verbs।', 'document/english/reporting-verbs-optative.pdf'],
+        ['०६', 'Reporting Verbs – Imperative Sentences', 'Imperative sentences का Reporting Verbs।', 'document/english/reporting-verbs-imperative.pdf']
       ]
     }
   }
@@ -81,3 +82,4 @@ document.querySelector('footer').children[1].textContent =
   'Created by Aniket Chaudhary';
 
 render();
+```
