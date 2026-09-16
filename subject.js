@@ -9,12 +9,12 @@ const subjects = {
       intro: 'English notes, grammar rules and study materials for Class 8.',
 
       resources: [
-        ['01', 'Question Tags Rules', 'Rules and examples of Question Tags.', 'documents/english/question-tags-rules.pdf'],
-        ['02', 'Reporting Verbs – Interrogative Sentences', 'Reporting verbs used with all types of interrogative sentences.', 'documents/english/reporting-verbs-interrogative.pdf'],
-        ['03', 'Reporting Verbs – Assertive Sentences', 'Reporting verbs used with assertive sentences.', 'documents/english/reporting-verbs-assertive.pdf'],
-        ['04', 'Reporting Verbs – Exclamatory Sentences', 'Reporting verbs used with all forms of exclamatory sentences.', 'documents/english/reporting-verbs-exclamatory.pdf'],
-        ['05', 'Reporting Verbs – Optative Sentences', 'Reporting verbs used with all forms of optative sentences.', 'documents/english/reporting-verbs-optative.pdf'],
-        ['06', 'Reporting Verbs – Imperative Sentences', 'Reporting verbs used with imperative sentences.', 'documents/english/reporting-verbs-imperative.pdf']
+        ['01', 'Question Tags Rules', 'Rules and examples of Question Tags.', 'document/english/question-tags-rules.pdf'],
+        ['02', 'Reporting Verbs – Interrogative Sentences', 'Reporting verbs used with all types of interrogative sentences.', 'document/english/reporting-verbs-interrogative.pdf'],
+        ['03', 'Reporting Verbs – Assertive Sentences', 'Reporting verbs used with assertive sentences.', 'document/english/reporting-verbs-assertive.pdf'],
+        ['04', 'Reporting Verbs – Exclamatory Sentences', 'Reporting verbs used with all forms of exclamatory sentences.', 'document/english/reporting-verbs-exclamatory.pdf'],
+        ['05', 'Reporting Verbs – Optative Sentences', 'Reporting verbs used with all forms of optative sentences.', 'document/english/reporting-verbs-optative.pdf'],
+        ['06', 'Reporting Verbs – Imperative Sentences', 'Reporting verbs used with imperative sentences.', 'document/english/reporting-verbs-imperative.pdf']
       ]
     },
 
