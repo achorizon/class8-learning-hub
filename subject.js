@@ -1,8 +1,83 @@
-const subjectKey=document.body.dataset.subject;
-const subjects={
-english:{icon:'Aa',en:{name:'English',intro:'Build confidence in reading, writing, speaking and listening.',resources:[['01','Reading corner','Stories, poems and comprehension practice.'],['02','Grammar guide','Tenses, parts of speech and sentence practice.'],['03','Writing workshop','Ideas for paragraphs, letters and creative writing.']],task:'This week: read one short story and write five new words in your notebook.',tip:'Tip: Read English for 15 minutes every day.'},np:{name:'अंग्रेजी',intro:'पढ्ने, लेख्ने, बोल्ने र सुन्ने सीपमा आत्मविश्वास बढाउनुहोस्।',resources:[['०१','पठन कुनो','कथा, कविता र बोध अभ्यास।'],['०२','व्याकरण गाइड','काल, शब्दका प्रकार र वाक्य अभ्यास।'],['०३','लेखन कार्यशाला','अनुच्छेद, पत्र र सिर्जनात्मक लेखनका विचारहरू।']],task:'यस हप्ता: एउटा छोटो कथा पढ्नुहोस् र कापीमा पाँच नयाँ शब्द लेख्नुहोस्।',tip:'सुझाव: हरेक दिन १५ मिनेट अंग्रेजी पढ्नुहोस्।'}},
-science:{icon:'⚗',en:{name:'Science',intro:'Ask questions, experiment safely and understand the world around you.',resources:[['01','Chapter notes','Key ideas from current lessons.'],['02','Lab notebook','Simple experiment steps and observations.'],['03','Science facts','Curious facts to share in class.']],task:'This week: label a plant cell diagram and learn its main parts.',tip:'Tip: Observe, ask why, then find the answer.'},np:{name:'विज्ञान',intro:'प्रश्न सोध्नुहोस्, सुरक्षित रूपमा प्रयोग गर्नुहोस् र वरपरको संसार बुझ्नुहोस्।',resources:[['०१','अध्याय नोटहरू','हालका पाठका मुख्य विचारहरू।'],['०२','प्रयोगशाला कापी','सरल प्रयोगका चरण र अवलोकनहरू।'],['०३','विज्ञान तथ्यहरू','कक्षामा सुनाउन मिल्ने रोचक तथ्यहरू।']],task:'यस हप्ता: वनस्पति कोषको चित्रमा नाम लेख्नुहोस् र मुख्य भाग जान्नुहोस्।',tip:'सुझाव: हेर्नुहोस्, किन भनेर सोध्नुहोस्, अनि उत्तर खोज्नुहोस्।'}},
+const subjectKey = document.body.dataset.subject;
+
+const subjects = {
+  english: {
+    icon: 'Aa',
+
+    en: {
+      name: 'English',
+      intro: 'English notes, grammar rules and study materials for Class 8.',
+
+      resources: [
+        ['01', 'Question Tags Rules', 'Rules and examples of Question Tags.', 'documents/english/question-tags-rules.pdf'],
+        ['02', 'Reporting Verbs – Interrogative Sentences', 'Reporting verbs used with all types of interrogative sentences.', 'documents/english/reporting-verbs-interrogative.pdf'],
+        ['03', 'Reporting Verbs – Assertive Sentences', 'Reporting verbs used with assertive sentences.', 'documents/english/reporting-verbs-assertive.pdf'],
+        ['04', 'Reporting Verbs – Exclamatory Sentences', 'Reporting verbs used with all forms of exclamatory sentences.', 'documents/english/reporting-verbs-exclamatory.pdf'],
+        ['05', 'Reporting Verbs – Optative Sentences', 'Reporting verbs used with all forms of optative sentences.', 'documents/english/reporting-verbs-optative.pdf'],
+        ['06', 'Reporting Verbs – Imperative Sentences', 'Reporting verbs used with imperative sentences.', 'documents/english/reporting-verbs-imperative.pdf']
+      ]
+    },
+
+    np: {
+      name: 'अंग्रेजी',
+      intro: 'कक्षा ८ का अंग्रेजी नोट्स, व्याकरण नियम र अध्ययन सामग्री।',
+
+      resources: [
+        ['०१', 'Question Tags Rules', 'Question Tags का नियम र उदाहरणहरू।', 'documents/english/question-tags-rules.pdf'],
+        ['०२', 'Reporting Verbs – Interrogative Sentences', 'Interrogative sentences का Reporting Verbs।', 'documents/english/reporting-verbs-interrogative.pdf'],
+        ['०३', 'Reporting Verbs – Assertive Sentences', 'Assertive sentences का Reporting Verbs।', 'documents/english/reporting-verbs-assertive.pdf'],
+        ['०४', 'Reporting Verbs – Exclamatory Sentences', 'Exclamatory sentences का Reporting Verbs।', 'documents/english/reporting-verbs-exclamatory.pdf'],
+        ['०५', 'Reporting Verbs – Optative Sentences', 'Optative sentences का Reporting Verbs।', 'documents/english/reporting-verbs-optative.pdf'],
+        ['०६', 'Reporting Verbs – Imperative Sentences', 'Imperative sentences का Reporting Verbs।', 'documents/english/reporting-verbs-imperative.pdf']
+      ]
+    }
+  }
 };
-let lang='en';
-function render(){const s=subjects[subjectKey][lang];document.documentElement.lang=lang==='en'?'en':'ne';document.title=`${s.name} | Class 8 Learning Hub`;document.getElementById('subjectName').textContent=s.name;document.getElementById('subjectIntro').textContent=s.intro;document.getElementById('subjectIcon').textContent=subjects[subjectKey].icon;document.getElementById('resourcesHeading').textContent=lang==='en'?'Learning resources':'सिकाइका स्रोतहरू';document.getElementById('taskHeading').textContent=lang==='en'?"This week's focus":'यस हप्ताको लक्ष्य';document.getElementById('taskText').textContent=s.task;document.getElementById('taskTip').textContent=s.tip;document.getElementById('backText').textContent=lang==='en'?'Back to all subjects':'सबै विषयमा फर्कनुहोस्';document.getElementById('languageToggle').textContent=lang==='en'?'नेपाली':'English';document.getElementById('resourceList').innerHTML=s.resources.map(r=>`<article class="resource-item"><span>${r[0]}</span><div><h3>${r[1]}</h3><p>${r[2]}</p></div></article>`).join('')}
-document.getElementById('languageToggle').addEventListener('click',()=>{lang=lang==='en'?'np':'en';render()});document.getElementById('year').textContent=new Date().getFullYear();document.querySelector('footer').children[0].lastChild.textContent=' AC HORIZON LEARNING HUB';document.querySelector('footer').children[1].textContent='Created by Aniket Chaudhary';render();
+
+let lang = 'en';
+
+function render() {
+  const s = subjects[subjectKey][lang];
+
+  document.documentElement.lang = lang === 'en' ? 'en' : 'ne';
+
+  document.title = `${s.name} | Class 8 Learning Hub`;
+
+  document.getElementById('subjectName').textContent = s.name;
+  document.getElementById('subjectIntro').textContent = s.intro;
+  document.getElementById('subjectIcon').textContent = subjects[subjectKey].icon;
+
+  document.getElementById('resourcesHeading').textContent =
+    lang === 'en' ? 'English Documents' : 'अंग्रेजी कागजातहरू';
+
+  document.getElementById('backText').textContent =
+    lang === 'en' ? 'Back to all subjects' : 'सबै विषयमा फर्कनुहोस्';
+
+  document.getElementById('languageToggle').textContent =
+    lang === 'en' ? 'नेपाली' : 'English';
+
+  document.getElementById('resourceList').innerHTML = s.resources.map(r => `
+    <a href="${r[3]}" target="_blank" rel="noopener noreferrer" class="resource-item">
+      <span>${r[0]}</span>
+      <div>
+        <h3>${r[1]}</h3>
+        <p>${r[2]}</p>
+      </div>
+    </a>
+  `).join('');
+}
+
+document.getElementById('languageToggle').addEventListener('click', () => {
+  lang = lang === 'en' ? 'np' : 'en';
+  render();
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.querySelector('footer').children[0].lastChild.textContent =
+  ' AC HORIZON LEARNING HUB';
+
+document.querySelector('footer').children[1].textContent =
+  'Created by Aniket Chaudhary';
+
+render();
