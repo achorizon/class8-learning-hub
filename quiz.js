@@ -232,3 +232,119 @@ dailyQuestions.forEach(
 
   }
 );
+document
+  .getElementById("submitBtn")
+  .addEventListener("click", () => {
+
+    let score = 0;
+
+    dailyQuestions.forEach((item, index) => {
+
+      const selected =
+        document.querySelector(
+          `input[name="question${index}"]:checked`
+        );
+
+      const questionBox =
+        document.querySelectorAll(
+          ".quiz-question"
+        )[index];
+
+      const labels =
+        questionBox.querySelectorAll("label");
+
+
+      /* Remove old results */
+      labels.forEach(label => {
+        label.style.fontWeight = "normal";
+      });
+
+
+      if (selected) {
+
+        const selectedAnswer =
+          Number(selected.value);
+
+        if (selectedAnswer === item.answer) {
+
+          score++;
+
+          labels[selectedAnswer]
+            .style.fontWeight = "bold";
+
+        } else {
+
+          labels[selectedAnswer]
+            .style.fontWeight = "bold";
+
+          labels[item.answer]
+            .style.fontWeight = "bold";
+        }
+
+      } else {
+
+        /* No answer selected */
+        labels[item.answer]
+          .style.fontWeight = "bold";
+      }
+
+    });
+
+
+    /* ===============================
+       SHOW RESULT
+    =============================== */
+
+    const result =
+      document.getElementById("result");
+
+    result.innerHTML = `
+      <h2>Your Score: ${score}/10</h2>
+      <p>
+        You answered ${score} out of 10
+        questions correctly.
+      </p>
+    `;
+
+
+    /* ===============================
+       HIDE SUBMIT
+    =============================== */
+
+    document.getElementById(
+      "submitBtn"
+    ).style.display = "none";
+
+
+    /* ===============================
+       SHOW TRY AGAIN
+    =============================== */
+
+    document.getElementById(
+      "retryBtn"
+    ).style.display = "inline-block";
+
+
+    /* Disable answers */
+    document
+      .querySelectorAll(
+        '#quiz input[type="radio"]'
+      )
+      .forEach(input => {
+        input.disabled = true;
+      });
+
+  });
+
+
+/* ===============================
+   TRY AGAIN
+================================ */
+
+document
+  .getElementById("retryBtn")
+  .addEventListener("click", () => {
+
+    location.reload();
+
+  });
