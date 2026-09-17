@@ -35,67 +35,63 @@ const subjects = {
 var lang = "en";
 
 function render() {
-
   var subject = subjects[subjectKey];
 
   if (!subject) {
-    console.error("Subject not found:", subjectKey);
     return;
   }
 
   var data = subject[lang];
 
-  var subjectName = document.getElementById("subjectName");
-  var subjectIntro = document.getElementById("subjectIntro");
-  var subjectIcon = document.getElementById("subjectIcon");
-  var resourcesHeading = document.getElementById("resourcesHeading");
-  var backText = document.getElementById("backText");
-  var languageToggle = document.getElementById("languageToggle");
-  var resourceList = document.getElementById("resourceList");
-  var year = document.getElementById("year");
+  var nameElement = document.getElementById("subjectName");
+  var introElement = document.getElementById("subjectIntro");
+  var iconElement = document.getElementById("subjectIcon");
+  var headingElement = document.getElementById("resourcesHeading");
+  var backElement = document.getElementById("backText");
+  var buttonElement = document.getElementById("languageToggle");
+  var listElement = document.getElementById("resourceList");
+  var yearElement = document.getElementById("year");
 
-  if (subjectName) {
-    subjectName.textContent = data.name;
+  if (nameElement) {
+    nameElement.textContent = data.name;
   }
 
-  if (subjectIntro) {
-    subjectIntro.textContent = data.intro;
+  if (introElement) {
+    introElement.textContent = data.intro;
   }
 
-  if (subjectIcon) {
-    subjectIcon.textContent = subject.icon;
+  if (iconElement) {
+    iconElement.textContent = subject.icon;
   }
 
-  if (resourcesHeading) {
+  if (headingElement) {
     if (lang === "en") {
-      resourcesHeading.textContent = "English Documents";
+      headingElement.textContent = "English Documents";
     } else {
-      resourcesHeading.textContent = "अंग्रेजी कागजातहरू";
+      headingElement.textContent = "अंग्रेजी कागजातहरू";
     }
   }
 
-  if (backText) {
+  if (backElement) {
     if (lang === "en") {
-      backText.textContent = "Back to all subjects";
+      backElement.textContent = "Back to all subjects";
     } else {
-      backText.textContent = "सबै विषयमा फर्कनुहोस्";
+      backElement.textContent = "सबै विषयमा फर्कनुहोस्";
     }
   }
 
-  if (languageToggle) {
+  if (buttonElement) {
     if (lang === "en") {
-      languageToggle.textContent = "नेपाली";
+      buttonElement.textContent = "नेपाली";
     } else {
-      languageToggle.textContent = "English";
+      buttonElement.textContent = "English";
     }
   }
 
-  if (resourceList) {
-
-    resourceList.innerHTML = "";
+  if (listElement) {
+    listElement.innerHTML = "";
 
     for (var i = 0; i < data.resources.length; i++) {
-
       var item = data.resources[i];
 
       var link = document.createElement("a");
@@ -107,7 +103,7 @@ function render() {
       var number = document.createElement("span");
       number.textContent = item[0];
 
-      var content = document.createElement("div");
+      var box = document.createElement("div");
 
       var title = document.createElement("h3");
       title.textContent = item[1];
@@ -115,26 +111,28 @@ function render() {
       var description = document.createElement("p");
       description.textContent = item[2];
 
-      content.appendChild(title);
-      content.appendChild(description);
+      box.appendChild(title);
+      box.appendChild(description);
 
       link.appendChild(number);
-      link.appendChild(content);
+      link.appendChild(box);
 
-      resourceList.appendChild(link);
+      listElement.appendChild(link);
     }
   }
 
-  if (year) {
-    year.textContent = new Date().getFullYear();
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
   }
+
+  document.documentElement.lang = lang === "en" ? "en" : "ne";
+  document.title = data.name + " | Class 8 Learning Hub";
 }
 
 var languageButton = document.getElementById("languageToggle");
 
 if (languageButton) {
-  languageButton.addEventListener("click", function () {
-
+  languageButton.addEventListener("click", function() {
     if (lang === "en") {
       lang = "np";
     } else {
