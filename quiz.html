@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,6 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
@@ -30,46 +30,9 @@
 
       <h2>Today's Quiz</h2>
 
-      <div class="quiz-subject-select">
+      <!-- SUBJECT IS AUTOMATICALLY SELECTED -->
 
-        <label for="subjectSelect">
-          Choose Subject:
-        </label>
-
-        <select id="subjectSelect">
-
-          <option value="english">
-            English
-          </option>
-
-          <option value="science">
-            Science
-          </option>
-
-          <option value="maths">
-            Maths
-          </option>
-
-          <option value="social">
-            Social Studies
-          </option>
-
-          <option value="nepali">
-            Nepali
-          </option>
-
-          <option value="computer">
-            Computer
-          </option>
-
-          <option value="health">
-            Health
-          </option>
-
-        </select>
-
-      </div>
-
+      <p id="quizSubject"></p>
 
       <p id="quizDate"></p>
 
@@ -88,14 +51,14 @@
 
 
       <button id="submitBtn">
-        Submit Quiz
+        Submit Answer
       </button>
 
 
       <div id="result"></div>
 
 
-      <!-- TARGET COMPLETE BOX -->
+      <!-- DAILY LIMIT COMPLETE -->
 
       <div
         id="targetComplete"
@@ -103,50 +66,20 @@
       >
 
         <h2>
-          🎉 Today's Target Complete!
+          🎉 Today's 10 Questions Complete!
         </h2>
 
         <p>
-          You have completed today's
-          10-question target.
+          You have completed today's quiz for this subject.
         </p>
 
         <p>
-          Do you want to continue?
+          You cannot solve more questions from this subject today.
         </p>
-
-
-        <button id="continueBtn">
-          Continue →
-        </button>
-
-
-        <button id="completeBtn">
-          Complete for Today
-        </button>
-
-      </div>
-
-
-      <!-- EXTRA PRACTICE -->
-
-      <div
-        id="extraPractice"
-        style="display:none;"
-      >
-
-        <h2>
-          📚 Extra Practice
-        </h2>
 
         <p>
-          You can continue solving
-          more questions if you want.
+          You can come back tomorrow for a new quiz.
         </p>
-
-        <button id="moreQuestionsBtn">
-          Solve More Questions →
-        </button>
 
       </div>
 
@@ -181,3 +114,4 @@
 </body>
 
 </html>
+```
