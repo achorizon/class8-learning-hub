@@ -64,9 +64,92 @@
       <div><p class="eyebrow" data-i18n="stayCurrent">STAY CURRENT</p><h2 data-i18n="noticeTitle">Notice board</h2></div>
       <div class="notice-list" id="noticeList"></div>
     </section>
+    <section class="reviews-section">
+
+  <div class="reviews-header">
+    <p class="eyebrow">SHARE YOUR EXPERIENCE</p>
+    <h2>⭐ Rate Our Website</h2>
+    <p>Tell us what you think about Class 8 Learning Hub.</p>
+  </div>
+
+  <div class="review-summary">
+
+    <div class="rating-summary">
+      <div class="big-rating" id="averageRating">0.0/5</div>
+      <div class="summary-stars">★★★★★</div>
+      <p>Average Rating</p>
+    </div>
+
+    <div class="review-count">
+      <div class="big-count" id="totalReviews">0</div>
+      <p>Total Reviews</p>
+    </div>
+
+  </div>
+
+  <div class="review-form-box">
+
+    <h3>Give Your Review</h3>
+
+    <form id="reviewForm">
+
+      <label for="reviewName">Your Name</label>
+
+      <input
+        type="text"
+        id="reviewName"
+        placeholder="Enter your name"
+        maxlength="50"
+        required
+      >
+
+      <label>Choose Your Rating</label>
+
+      <div class="rating-stars" aria-label="Choose rating">
+        <button type="button" class="rating-star" data-rating="1">☆</button>
+        <button type="button" class="rating-star" data-rating="2">☆</button>
+        <button type="button" class="rating-star" data-rating="3">☆</button>
+        <button type="button" class="rating-star" data-rating="4">☆</button>
+        <button type="button" class="rating-star" data-rating="5">☆</button>
+      </div>
+
+      <input type="hidden" id="reviewRating">
+
+      <label for="reviewComment">Your Review</label>
+
+      <textarea
+        id="reviewComment"
+        placeholder="Write your review..."
+        maxlength="500"
+        required
+      ></textarea>
+
+      <button type="submit" class="submit-review-btn">
+        Submit Review
+      </button>
+
+    </form>
+
+  </div>
+
+  <div class="visitor-reviews-box">
+
+    <div class="visitor-reviews-title">
+      <h3>⭐ Visitor Reviews</h3>
+      <p>Reviews shared by visitors of our website.</p>
+    </div>
+
+    <div id="visitorReviews">
+      <p>Loading reviews...</p>
+    </div>
+
+  </div>
+
+</section>
   </main>
   <footer><span>© <span id="year"></span> <span data-i18n="footer">Class 8 Learning Hub</span></span><span data-i18n="footerMessage">Made for curious minds.</span></footer>
   <script src="script.js"></script>
   <script type="module" src="firebase-review.js"></script>
+  <script type="module" src="review.js"></script>
 </body>
 </html>
