@@ -6,29 +6,39 @@ const copy = {
     navSubjects: 'Subjects',
     navSchedule: 'Timetable',
     navNotices: 'Notices',
+
     eyebrow: 'WELCOME TO OUR DIGITAL CLASSROOM',
     heroTitle: 'A brighter way to learn, every day.',
     heroText: 'Your home for lessons, important updates, weekly plans, and a little extra motivation.',
+
     explore: 'Explore subjects',
     updates: 'Latest updates',
     quote: 'Small steps make big progress.',
+
     statSubjects: 'Core subjects',
     statDays: 'Learning days',
     statPossibilities: 'Possibilities',
+
     learnBy: 'LEARN BY SUBJECT',
     subjectsTitle: 'What are we learning?',
     subjectsText: 'Choose a subject to focus your study time.',
+
     english: 'English',
     englishDesc: 'Read, write and express yourself.',
+
     science: 'Science',
     scienceDesc: 'Explore how the world works.',
+
     viewResources: 'View resources →',
+
     weeklyPlan: 'WEEKLY PLAN',
     scheduleTitle: "This week's timetable",
     day: 'Day',
     timetableNote: 'Sample timetable — update it with your school schedule.',
-    stayCurrent: 'STAY CURRENT',
-    noticeTitle: 'Notice board',
+
+    stayCurrent: 'CLASS 8 INFORMATION',
+    noticeTitle: 'Class 8 Information',
+
     footer: 'Class 8 Learning Hub',
     footerMessage: 'Made for curious minds.'
   },
@@ -40,36 +50,51 @@ const copy = {
     navSubjects: 'विषयहरू',
     navSchedule: 'समय तालिका',
     navNotices: 'सूचनाहरू',
+
     eyebrow: 'हाम्रो डिजिटल कक्षाकोठामा स्वागत छ',
     heroTitle: 'हरेक दिन सिक्ने अझ उज्यालो तरिका।',
     heroText: 'पाठ, महत्त्वपूर्ण जानकारी, साप्ताहिक योजना र प्रेरणाका लागि तपाईंको आफ्नै ठाउँ।',
+
     explore: 'विषयहरू हेर्नुहोस्',
     updates: 'नयाँ जानकारी',
     quote: 'साना पाइला, ठूलो प्रगति।',
+
     statSubjects: 'मुख्य विषयहरू',
     statDays: 'सिकाइका दिनहरू',
     statPossibilities: 'सम्भावनाहरू',
+
     learnBy: 'विषयअनुसार सिक्नुहोस्',
     subjectsTitle: 'हामी के सिकिरहेका छौँ?',
     subjectsText: 'आफ्नो पढाइको समयलाई केन्द्रित गर्न विषय छान्नुहोस्।',
+
     english: 'अंग्रेजी',
     englishDesc: 'पढ्नुहोस्, लेख्नुहोस् र आफैलाई व्यक्त गर्नुहोस्।',
+
     science: 'विज्ञान',
     scienceDesc: 'संसार कसरी चल्छ पत्ता लगाउनुहोस्।',
+
     viewResources: 'स्रोतहरू हेर्नुहोस् →',
+
     weeklyPlan: 'साप्ताहिक योजना',
     scheduleTitle: 'यस हप्ताको समय तालिका',
     day: 'दिन',
     timetableNote: 'नमूना समय तालिका — यसलाई आफ्नो विद्यालयको तालिकाअनुसार बदल्नुहोस्।',
-    stayCurrent: 'जानकारीमा रहनुहोस्',
-    noticeTitle: 'सूचना पाटी',
+
+    stayCurrent: 'कक्षा ८ जानकारी',
+    noticeTitle: 'कक्षा ८ जानकारी',
+
     footer: 'कक्षा ८ लर्निङ हब',
     footerMessage: 'जिज्ञासु मनका लागि बनाइएको।'
   }
 };
 
 
+/* ==============================
+   CLASS 8 INFORMATION
+================================ */
+
 const notices = {
+
   en: [
     [
       'CLASS',
@@ -86,20 +111,23 @@ const notices = {
       6th Period — Nagendra Sir - English<br>
       7th Period — Bijay Sir - Maths<br><br>
 
-      <strong>All our teachers are kings in their respective subjects. 👑</strong>
+      <strong>Total Students of Class 8:</strong> 27
       `
     ],
 
     [
-      '18 SEP',
-      'Maths quiz',
-      'Revise chapters 4 and 5 before Thursday.'
-    ],
-
-    [
-      '20 SEP',
-      'Clean classroom day',
-      'Let’s make our learning space shine together!'
+      'LIST',
+      'Watch the Students List',
+      `
+      <a
+        href="document/class8/student-list.pdf"
+        target="_blank"
+        rel="noopener"
+        class="student-list-link"
+      >
+        📄 Click here to watch the Class 8 Students List →
+      </a>
+      `
     ]
   ],
 
@@ -119,27 +147,35 @@ const notices = {
       ६औँ पिरियड — Nagendra Sir - English<br>
       ७औँ पिरियड — Bijay Sir - Maths<br><br>
 
-      <strong>हाम्रा सबै शिक्षकहरू आफ्ना-आफ्ना विषयका King हुनुहुन्छ। 👑</strong>
+      <strong>कक्षा ८ का जम्मा विद्यार्थी:</strong> 27
       `
     ],
 
     [
-      '१८ सेप्टेम्बर',
-      'गणित क्विज',
-      'बिहीबारअघि अध्याय ४ र ५ दोहोर्याउनुहोस्।'
-    ],
-
-    [
-      '२० सेप्टेम्बर',
-      'कक्षा सफाइ दिवस',
-      'हाम्रो सिकाइको ठाउँलाई सँगै चम्काऔँ!'
+      'LIST',
+      'विद्यार्थीहरूको सूची हेर्नुहोस्',
+      `
+      <a
+        href="document/class8/student-list.pdf"
+        target="_blank"
+        rel="noopener"
+        class="student-list-link"
+      >
+        📄 कक्षा ८ का विद्यार्थीहरूको सूची हेर्न यहाँ क्लिक गर्नुहोस् →
+      </a>
+      `
     ]
   ]
+
 };
 
 
 let lang = 'en';
 
+
+/* ==============================
+   RENDER
+================================ */
 
 function render() {
 
@@ -152,17 +188,29 @@ function render() {
   document
     .querySelectorAll('[data-i18n]')
     .forEach(el => {
-      el.textContent = t[el.dataset.i18n];
+
+      el.textContent =
+        t[el.dataset.i18n];
+
     });
 
 
-  document.getElementById('languageToggle').textContent =
-    lang === 'en' ? 'नेपाली' : 'English';
+  document.getElementById(
+    'languageToggle'
+  ).textContent =
+    lang === 'en'
+      ? 'नेपाली'
+      : 'English';
 
 
-  document.getElementById('noticeList').innerHTML =
+  document.getElementById(
+    'noticeList'
+  ).innerHTML =
+
     notices[lang]
+
       .map(n => `
+
         <article class="notice-item">
 
           <span class="notice-date">
@@ -182,9 +230,13 @@ function render() {
           </div>
 
         </article>
+
       `)
+
       .join('');
 
+
+  /* Footer */
 
   document.querySelector(
     '[data-i18n="footer"]'
@@ -196,55 +248,92 @@ function render() {
     '[data-i18n="footerMessage"]'
   ).textContent =
     'Created by Aniket Chaudhary';
+
 }
 
 
+/* ==============================
+   LANGUAGE BUTTON
+================================ */
+
 document
   .getElementById('languageToggle')
-  .addEventListener('click', () => {
+  .addEventListener(
+    'click',
+    () => {
 
-    lang = lang === 'en' ? 'np' : 'en';
+      lang =
+        lang === 'en'
+          ? 'np'
+          : 'en';
 
-    render();
+      render();
 
-  });
+    }
+  );
 
+
+/* ==============================
+   SUBJECT CARDS
+================================ */
 
 document
-  .querySelectorAll('.subject-card[data-page]')
+  .querySelectorAll(
+    '.subject-card[data-page]'
+  )
   .forEach(card => {
 
-    card.addEventListener('click', event => {
+    card.addEventListener(
+      'click',
+      event => {
 
-      if (event.target.closest('a')) {
-        return;
-      }
+        if (
+          event.target.closest('a')
+        ) {
+          return;
+        }
 
-      location.href = card.dataset.page;
-
-    });
-
-
-    card.addEventListener('keydown', event => {
-
-      if (
-        event.key === 'Enter' ||
-        event.key === ' '
-      ) {
-
-        event.preventDefault();
-
-        location.href = card.dataset.page;
+        location.href =
+          card.dataset.page;
 
       }
+    );
 
-    });
+
+    card.addEventListener(
+      'keydown',
+      event => {
+
+        if (
+          event.key === 'Enter' ||
+          event.key === ' '
+        ) {
+
+          event.preventDefault();
+
+          location.href =
+            card.dataset.page;
+
+        }
+
+      }
+    );
 
   });
 
 
-document.getElementById('year').textContent =
+/* ==============================
+   YEAR
+================================ */
+
+document.getElementById(
+  'year'
+).textContent =
   new Date().getFullYear();
 
+
+/* ==============================
+   START
+================================ */
 
 render();
