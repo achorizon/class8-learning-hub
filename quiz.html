@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Daily Quiz | Class 8 Learning Hub</title>
+  <title>Daily Quiz | AC HORIZON LEARNING HUB</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
   <header>
+
     <h1>Class 8 Daily Quiz</h1>
-    <p>10 Questions · New Quiz Every Day</p>
+
+    <p>
+      10 Questions · Every Day
+    </p>
+
   </header>
 
 
@@ -24,30 +31,130 @@
       <h2>Today's Quiz</h2>
 
       <div class="quiz-subject-select">
-  <label for="subjectSelect">Choose Subject:</label>
 
-  <select id="subjectSelect">
-    <option value="english">English</option>
-    <option value="science">Science</option>
-    <option value="maths">Maths</option>
-    <option value="social">Social Studies</option>
-    <option value="nepali">Nepali</option>
-    <option value="computer">Computer</option>
-    <option value="health">Health</option>
-  </select>
-</div>
-      
+        <label for="subjectSelect">
+          Choose Subject:
+        </label>
+
+        <select id="subjectSelect">
+
+          <option value="english">
+            English
+          </option>
+
+          <option value="science">
+            Science
+          </option>
+
+          <option value="maths">
+            Maths
+          </option>
+
+          <option value="social">
+            Social Studies
+          </option>
+
+          <option value="nepali">
+            Nepali
+          </option>
+
+          <option value="computer">
+            Computer
+          </option>
+
+          <option value="health">
+            Health
+          </option>
+
+        </select>
+
+      </div>
+
+
       <p id="quizDate"></p>
 
+
+      <div id="progress">
+
+        Today's Target:
+        <strong>
+          <span id="currentCount">0</span>/10
+        </strong>
+
+      </div>
+
+
       <div id="quiz"></div>
+
 
       <button id="submitBtn">
         Submit Quiz
       </button>
 
+
       <div id="result"></div>
 
-      <button id="retryBtn" style="display:none;">
+
+      <!-- TARGET COMPLETE BOX -->
+
+      <div
+        id="targetComplete"
+        style="display:none;"
+      >
+
+        <h2>
+          🎉 Today's Target Complete!
+        </h2>
+
+        <p>
+          You have completed today's
+          10-question target.
+        </p>
+
+        <p>
+          Do you want to continue?
+        </p>
+
+
+        <button id="continueBtn">
+          Continue →
+        </button>
+
+
+        <button id="completeBtn">
+          Complete for Today
+        </button>
+
+      </div>
+
+
+      <!-- EXTRA PRACTICE -->
+
+      <div
+        id="extraPractice"
+        style="display:none;"
+      >
+
+        <h2>
+          📚 Extra Practice
+        </h2>
+
+        <p>
+          You can continue solving
+          more questions if you want.
+        </p>
+
+        <button id="moreQuestionsBtn">
+          Solve More Questions →
+        </button>
+
+      </div>
+
+
+      <button
+        id="retryBtn"
+        style="display:none;"
+      >
         Try Again
       </button>
 
@@ -57,12 +164,20 @@
 
 
   <footer>
-    <span>© 2026 AC HORIZON LEARNING HUB</span>
-    <span>Created by Aniket Chaudhary</span>
+
+    <span>
+      © 2026 AC HORIZON LEARNING HUB
+    </span>
+
+    <span>
+      Created by Aniket Chaudhary
+    </span>
+
   </footer>
 
 
   <script src="quiz.js"></script>
 
 </body>
+
 </html>
