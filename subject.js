@@ -37,17 +37,11 @@ const subjects = {
 let lang = 'en';
 
 function render() {
-
-  if (!subjects[subjectKey]) {
-    console.error('Subject not found:', subjectKey);
-    return;
-  }
-
   const s = subjects[subjectKey][lang];
 
   document.documentElement.lang = lang === 'en' ? 'en' : 'ne';
 
-  document.title = `${s.name} | Class 8 Learning Hub`;
+  document.title = s.name + ' | Class 8 Learning Hub';
 
   const subjectName = document.getElementById('subjectName');
   const subjectIntro = document.getElementById('subjectIntro');
@@ -71,62 +65,60 @@ function render() {
 
   if (resourcesHeading) {
     resourcesHeading.textContent =
-      lang === 'en'
-        ? 'English Documents'
-        : 'अंग्रेजी कागजातहरू';
+      lang === 'en' ? 'English Documents' : 'अंग्रेजी कागजातहरू';
   }
 
   if (backText) {
     backText.textContent =
-      lang === 'en'
-        ? 'Back to all subjects'
-        : 'सबै विषयमा फर्कनुहोस्';
+      lang === 'en' ? 'Back to all subjects' : 'सबै विषयमा फर्कनुहोस्';
   }
 
   if (languageToggle) {
     languageToggle.textContent =
-      lang === 'en'
-        ? 'नेपाली'
-        : 'English';
+      lang === 'en' ? 'नेपाली' : 'English';
   }
 
   if (resourceList) {
+    resourceList.innerHTML = '';
 
-    resourceList.innerHTML = s.resources.map(r => `
-      <a
-        href="${r[3]}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="resource-item"
-      >
-        <span>${r[0]}</span>
+    s.resources.forEach(function (r) {
+      const link = document.createElement('a');
 
-        <div>
-          <h3>${r[1]}</h3>
-          <p>${r[2]}</p>
-        </div>
-      </a>
-    `).join('');
+      link.href = r[3];
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'resource-item';
 
-  } else {
-    console.error('resourceList element not found.');
+      const number = document.createElement('span');
+      number.textContent = r[0];
+
+      const content = document.createElement('div');
+
+      const title = document.createElement('h3');
+      title.textContent = r[1];
+
+      const description = document.createElement('p');
+      description.textContent = r[2];
+
+      content.appendChild(title);
+      content.appendChild(description);
+
+      link.appendChild(number);
+      link.appendChild(content);
+
+      resourceList.appendChild(link);
+    });
   }
 }
-
-
-/* Language button */
 
 const languageToggle = document.getElementById('languageToggle');
 
 if (languageToggle) {
-  languageToggle.addEventListener('click', () => {
+  languageToggle.addEventListener('click', function () {
     lang = lang === 'en' ? 'np' : 'en';
     render();
   });
 }
-
-
-/* Footer year */
 
 const year = document.getElementById('year');
 
@@ -134,13 +126,9 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
-
-/* Footer text */
-
 const footer = document.querySelector('footer');
 
 if (footer) {
-
   if (footer.children[0]) {
     footer.children[0].lastChild.textContent =
       ' AC HORIZON LEARNING HUB';
@@ -151,8 +139,5 @@ if (footer) {
       'Created by Aniket Chaudhary';
   }
 }
-
-
-/* Start */
 
 render();
