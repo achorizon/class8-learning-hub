@@ -20,7 +20,7 @@ const copy = {
     statPossibilities: 'Possibilities',
 
     learnBy: 'LEARN BY SUBJECT',
-    subjectsTitle: 'What are we learning?',
+    subjectsTitle: 'Subjects',
     subjectsText: 'Choose a subject to focus your study time.',
 
     english: 'English',
@@ -64,7 +64,7 @@ const copy = {
     statPossibilities: 'सम्भावनाहरू',
 
     learnBy: 'विषयअनुसार सिक्नुहोस्',
-    subjectsTitle: 'हामी के सिकिरहेका छौँ?',
+    subjectsTitle: 'विषयहरू',
     subjectsText: 'आफ्नो पढाइको समयलाई केन्द्रित गर्न विषय छान्नुहोस्।',
 
     english: 'अंग्रेजी',
