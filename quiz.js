@@ -1,6 +1,7 @@
 const DAILY_TARGET = 10;
 
 const questionBanks = {
+
   english: [
     {
       question: "Choose the correct question tag: She is a teacher, ____?",
@@ -103,7 +104,12 @@ const questionBanks = {
     },
     {
       question: "In which province is Mahottari District located?",
-      options: ["Madhesh Province", "Koshi Province", "Bagmati Province", "Gandaki Province"],
+      options: [
+        "Madhesh Province",
+        "Koshi Province",
+        "Bagmati Province",
+        "Gandaki Province"
+      ],
       answer: 0
     },
     {
@@ -192,28 +198,42 @@ const questionBanks = {
     },
     {
       question: "Which practice helps prevent the spread of many diseases?",
-      options: ["Skipping meals", "Handwashing", "Sleeping less", "Eating only sweets"],
+      options: [
+        "Skipping meals",
+        "Handwashing",
+        "Sleeping less",
+        "Eating only sweets"
+      ],
       answer: 1
     },
     {
       question: "Which activity is useful for maintaining physical fitness?",
-      options: ["Regular exercise", "Skipping sleep", "Smoking", "Avoiding movement"],
+      options: [
+        "Regular exercise",
+        "Skipping sleep",
+        "Smoking",
+        "Avoiding movement"
+      ],
       answer: 0
     }
   ]
 };
 
 
+/* =========================
+   QUIZ VARIABLES
+========================= */
+
 let currentSubject = "english";
 let currentQuestions = [];
 let currentIndex = 0;
 let score = 0;
-let isExtraPractice = false;
+let submitting = false;
 
 
-/* -----------------------------
+/* =========================
    NEPAL DATE
------------------------------ */
+========================= */
 
 function getNepalDate() {
 
@@ -224,17 +244,80 @@ function getNepalDate() {
 }
 
 
-/* -----------------------------
-   DAILY START POSITION
------------------------------ */
+/* =========================
+   STORAGE KEY
+========================= */
+
+function getStorageKey(subject) {
+
+  return "quizProgress_" + getNepalDate() + "_" + subject;
+
+}
+
+
+/* =========================
+   GET TODAY'S PROGRESS
+========================= */
+
+function getProgress(subject) {
+
+  const key = getStorageKey(subject);
+
+  const saved = localStorage.getItem(key);
+
+  if (!saved) {
+    return {
+      count: 0,
+      score: 0
+    };
+  }
+
+  try {
+
+    return JSON.parse(saved);
+
+  } catch {
+
+    return {
+      count: 0,
+      score: 0
+    };
+
+  }
+
+}
+
+
+/* =========================
+   SAVE PROGRESS
+========================= */
+
+function saveProgress(subject, count, scoreValue) {
+
+  const key = getStorageKey(subject);
+
+  localStorage.setItem(
+    key,
+    JSON.stringify({
+      count: count,
+      score: scoreValue
+    })
+  );
+
+}
+
+
+/* =========================
+   DAILY QUESTION START
+========================= */
 
 function getDailyStart(subject) {
 
   const date = getNepalDate();
 
-  let hash = 0;
-
   const text = date + "-" + subject;
+
+  let hash = 0;
 
   for (let i = 0; i < text.length; i++) {
 
@@ -248,9 +331,9 @@ function getDailyStart(subject) {
 }
 
 
-/* -----------------------------
-   CREATE TODAY'S QUESTIONS
------------------------------ */
+/* =========================
+   CREATE TODAY'S 10 QUESTIONS
+========================= */
 
 function createDailyQuestions() {
 
@@ -277,83 +360,82 @@ function createDailyQuestions() {
 }
 
 
-/* -----------------------------
-   CREATE EXTRA QUESTIONS
------------------------------ */
-
-function createExtraQuestions() {
-
-  const bank = questionBanks[currentSubject];
-
-  if (!bank || bank.length === 0) {
-    return [];
-  }
-
-  const start = getDailyStart(currentSubject);
-
-  const questions = [];
-
-  for (let i = DAILY_TARGET; i < bank.length; i++) {
-
-    questions.push(
-      bank[(start + i) % bank.length]
-    );
-
-  }
-
-  return questions;
-
-}
-
-
-/* -----------------------------
+/* =========================
    LOAD QUIZ
------------------------------ */
+========================= */
 
 function loadQuiz() {
 
-  currentIndex = 0;
-  score = 0;
-  isExtraPractice = false;
-
   currentQuestions = createDailyQuestions();
+
+  const progress = getProgress(currentSubject);
+
+  currentIndex = progress.count;
+  score = progress.score;
 
   document.getElementById("quizDate").textContent =
     "Date: " + getNepalDate();
 
-  document.getElementById("currentCount").textContent = "0";
+  document.getElementById("quizSubject").textContent =
+    "Today's Subject: " +
+    currentSubject.charAt(0).toUpperCase() +
+    currentSubject.slice(1);
+
+  document.getElementById("currentCount").textContent =
+    Math.min(progress.count, DAILY_TARGET);
 
   document.getElementById("result").innerHTML = "";
 
-  document.getElementById("targetComplete").style.display = "none";
+  document.getElementById("targetComplete").style.display =
+    "none";
 
-  document.getElementById("extraPractice").style.display = "none";
+  document.getElementById("retryBtn").style.display =
+    "none";
 
-  document.getElementById("retryBtn").style.display = "none";
+  document.getElementById("submitBtn").style.display =
+    "block";
 
-  document.getElementById("submitBtn").style.display = "block";
+  submitting = false;
+
+  if (progress.count >= DAILY_TARGET) {
+
+    showCompleted();
+
+    return;
+
+  }
 
   showQuestion();
 
 }
 
 
-/* -----------------------------
+/* =========================
    SHOW QUESTION
------------------------------ */
+========================= */
 
 function showQuestion() {
 
   const quiz = document.getElementById("quiz");
 
-  if (currentIndex >= currentQuestions.length) {
+  if (currentIndex >= DAILY_TARGET) {
 
     finishQuiz();
 
     return;
+
   }
 
   const q = currentQuestions[currentIndex];
+
+  if (!q) {
+
+    quiz.innerHTML =
+      "<p>No question available.</p>";
+
+    return;
+
+  }
 
   let html = "";
 
@@ -361,7 +443,7 @@ function showQuestion() {
     <div class="question-card">
 
       <h3>
-        Question ${currentIndex + 1}
+        Question ${currentIndex + 1} of ${DAILY_TARGET}
       </h3>
 
       <p>
@@ -372,7 +454,13 @@ function showQuestion() {
   q.options.forEach((option, index) => {
 
     html += `
-      <label style="display:block; margin:10px 0; cursor:pointer;">
+      <label
+        style="
+          display:block;
+          margin:10px 0;
+          cursor:pointer;
+        "
+      >
 
         <input
           type="radio"
@@ -394,11 +482,17 @@ function showQuestion() {
 }
 
 
-/* -----------------------------
+/* =========================
    SUBMIT ANSWER
------------------------------ */
+========================= */
 
 function submitAnswer() {
+
+  if (submitting) {
+    return;
+  }
+
+  submitting = true;
 
   const selected =
     document.querySelector(
@@ -409,6 +503,8 @@ function submitAnswer() {
 
     alert("Please select an answer.");
 
+    submitting = false;
+
     return;
 
   }
@@ -416,193 +512,134 @@ function submitAnswer() {
   const answer =
     Number(selected.value);
 
-  const correctAnswer =
-    currentQuestions[currentIndex].answer;
+  const question =
+    currentQuestions[currentIndex];
 
-  if (answer === correctAnswer) {
-
+  if (answer === question.answer) {
     score++;
-
   }
 
   currentIndex++;
 
+  saveProgress(
+    currentSubject,
+    currentIndex,
+    score
+  );
+
   document.getElementById("currentCount").textContent =
     Math.min(currentIndex, DAILY_TARGET);
 
-  showQuestion();
+  document.getElementById("submitBtn").disabled = true;
+
+  setTimeout(() => {
+
+    document.getElementById("submitBtn").disabled = false;
+
+    submitting = false;
+
+    showQuestion();
+
+  }, 150);
 
 }
 
 
-/* -----------------------------
-   FINISH
------------------------------ */
+/* =========================
+   FINISH QUIZ
+========================= */
 
 function finishQuiz() {
 
-  document.getElementById("quiz").innerHTML = "";
-
-  document.getElementById("submitBtn").style.display = "none";
-
-  if (!isExtraPractice) {
-
-    document.getElementById("result").innerHTML =
-      `
-        <h3>
-          Your Score: ${score}/${currentQuestions.length}
-        </h3>
-      `;
-
-    document.getElementById("targetComplete").style.display =
-      "block";
-
-  } else {
-
-    document.getElementById("result").innerHTML =
-      `
-        <h3>
-          Extra Practice Score: ${score}/${currentQuestions.length}
-        </h3>
-      `;
-
-    document.getElementById("extraPractice").style.display =
-      "block";
-
-  }
-
-}
-
-
-/* -----------------------------
-   CONTINUE
------------------------------ */
-
-function continueQuiz() {
-
-  const extraQuestions =
-    createExtraQuestions();
-
-  if (extraQuestions.length === 0) {
-
-    document.getElementById("targetComplete").style.display =
-      "none";
-
-    document.getElementById("result").innerHTML =
-      `
-        <h3>
-          🎉 You completed all available questions!
-        </h3>
-      `;
-
-    return;
-  }
-
-  isExtraPractice = true;
-
-  currentIndex = 0;
-
-  score = 0;
-
-  currentQuestions = extraQuestions;
-
-  document.getElementById("targetComplete").style.display =
-    "none";
-
-  document.getElementById("extraPractice").style.display =
-    "none";
-
-  document.getElementById("result").innerHTML = "";
-
-  document.getElementById("submitBtn").style.display =
-    "block";
-
-  showQuestion();
-
-}
-
-
-/* -----------------------------
-   COMPLETE FOR TODAY
------------------------------ */
-
-function completeForToday() {
-
-  document.getElementById("targetComplete").style.display =
-    "none";
+  saveProgress(
+    currentSubject,
+    DAILY_TARGET,
+    score
+  );
 
   document.getElementById("quiz").innerHTML = "";
 
   document.getElementById("submitBtn").style.display =
     "none";
+
+  document.getElementById("currentCount").textContent =
+    DAILY_TARGET;
 
   document.getElementById("result").innerHTML =
     `
       <h3>
-        ✅ Completed for Today
+        Your Score: ${score}/${DAILY_TARGET}
       </h3>
-
-      <p>
-        Come back tomorrow for a new daily quiz.
-      </p>
     `;
+
+  document.getElementById("targetComplete").style.display =
+    "block";
 
 }
 
 
-/* -----------------------------
-   MORE QUESTIONS
------------------------------ */
+/* =========================
+   SUBJECT COMPLETE
+========================= */
 
-function moreQuestions() {
+function showCompleted() {
 
-  if (!isExtraPractice) {
+  const progress = getProgress(currentSubject);
 
-    continueQuiz();
+  document.getElementById("quiz").innerHTML = "";
+
+  document.getElementById("submitBtn").style.display =
+    "none";
+
+  document.getElementById("currentCount").textContent =
+    DAILY_TARGET;
+
+  document.getElementById("result").innerHTML =
+    `
+      <h3>
+        Your Score: ${progress.score}/${DAILY_TARGET}
+      </h3>
+    `;
+
+  document.getElementById("targetComplete").style.display =
+    "block";
+
+}
+
+
+/* =========================
+   RETRY
+========================= */
+
+function retryQuiz() {
+
+  const progress = getProgress(currentSubject);
+
+  if (progress.count >= DAILY_TARGET) {
+
+    showCompleted();
 
     return;
 
   }
 
-  const bank = questionBanks[currentSubject];
-
-  const start = getDailyStart(currentSubject);
-
-  const extra = [];
-
-  for (let i = 0; i < bank.length; i++) {
-
-    extra.push(
-      bank[(start + DAILY_TARGET + i) % bank.length]
-    );
-
-  }
-
-  currentQuestions = extra;
-
-  currentIndex = 0;
-
-  score = 0;
-
-  document.getElementById("extraPractice").style.display =
-    "none";
-
-  document.getElementById("submitBtn").style.display =
-    "block";
-
-  showQuestion();
+  loadQuiz();
 
 }
 
 
-/* -----------------------------
-   SUBJECT CHANGE
------------------------------ */
+/* =========================
+   SUBJECT SELECT
+========================= */
 
 function changeSubject() {
 
   const select =
     document.getElementById("subjectSelect");
+
+  if (!select) {
+    return;
+  }
 
   currentSubject = select.value;
 
@@ -611,71 +648,51 @@ function changeSubject() {
 }
 
 
-/* -----------------------------
-   RETRY
------------------------------ */
-
-function retryQuiz() {
-
-  loadQuiz();
-
-}
-
-
-/* -----------------------------
+/* =========================
    BUTTON EVENTS
------------------------------ */
+========================= */
 
-document
-  .getElementById("submitBtn")
-  .addEventListener(
+const submitBtn =
+  document.getElementById("submitBtn");
+
+if (submitBtn) {
+
+  submitBtn.addEventListener(
     "click",
     submitAnswer
   );
 
-
-document
-  .getElementById("continueBtn")
-  .addEventListener(
-    "click",
-    continueQuiz
-  );
+}
 
 
-document
-  .getElementById("completeBtn")
-  .addEventListener(
-    "click",
-    completeForToday
-  );
+const retryBtn =
+  document.getElementById("retryBtn");
 
+if (retryBtn) {
 
-document
-  .getElementById("moreQuestionsBtn")
-  .addEventListener(
-    "click",
-    moreQuestions
-  );
-
-
-document
-  .getElementById("retryBtn")
-  .addEventListener(
+  retryBtn.addEventListener(
     "click",
     retryQuiz
   );
 
+}
 
-document
-  .getElementById("subjectSelect")
-  .addEventListener(
+
+const subjectSelect =
+  document.getElementById("subjectSelect");
+
+if (subjectSelect) {
+
+  subjectSelect.addEventListener(
     "change",
     changeSubject
   );
 
+}
 
-/* -----------------------------
+
+/* =========================
    START
------------------------------ */
+========================= */
 
 loadQuiz();
