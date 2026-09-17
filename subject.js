@@ -29,6 +29,34 @@ const subjects = {
         ["०६", "Reporting Verbs – Imperative Sentences", "Imperative sentences का Reporting Verbs।", "document/english/reporting-verbs-used-with-imperative-sentences.pdf"]
       ]
     }
+  },
+
+  science: {
+    icon: "⚗️",
+
+    en: {
+      name: "Science",
+      intro: "Science notes, study materials and learning resources for Class 8.",
+      resources: [
+        ["01", "Lesson 1 - Scientific Learning", "Study material for Scientific Learning.", "document/science/Lesson 1 - Scientific Learning.pdf"],
+        ["02", "Lesson 3A - The Cell", "Study material about the cell and its structure.", "document/science/Lesson 3A - The Cell.pdf"],
+        ["03", "Lesson 3B - Classification of Living Beings", "Study material about the classification of living beings.", "document/science/Lesson 3B - Classification of living beings.pdf"],
+        ["04", "Lesson 4A - Biodiversity", "Study material about biodiversity.", "document/science/Lesson 4A - Biodiversity.pdf"],
+        ["05", "Lesson 9A - Atomic Structure", "Study material about atomic structure.", "document/science/Lesson 9A - Atomic Structure.pdf"]
+      ]
+    },
+
+    np: {
+      name: "विज्ञान",
+      intro: "कक्षा ८ का विज्ञान नोट्स, अध्ययन सामग्री र सिकाइ स्रोतहरू।",
+      resources: [
+        ["०१", "Lesson 1 - Scientific Learning", "Scientific Learning सम्बन्धी अध्ययन सामग्री।", "document/science/Lesson 1 - Scientific Learning.pdf"],
+        ["०२", "Lesson 3A - The Cell", "Cell र यसको संरचना सम्बन्धी अध्ययन सामग्री।", "document/science/Lesson 3A - The Cell.pdf"],
+        ["०३", "Lesson 3B - Classification of Living Beings", "Living beings को classification सम्बन्धी अध्ययन सामग्री।", "document/science/Lesson 3B - Classification of living beings.pdf"],
+        ["०४", "Lesson 4A - Biodiversity", "Biodiversity सम्बन्धी अध्ययन सामग्री।", "document/science/Lesson 4A - Biodiversity.pdf"],
+        ["०५", "Lesson 9A - Atomic Structure", "Atomic Structure सम्बन्धी अध्ययन सामग्री।", "document/science/Lesson 9A - Atomic Structure.pdf"]
+      ]
+    }
   }
 };
 
@@ -65,10 +93,12 @@ function render() {
   }
 
   if (headingElement) {
-    if (lang === "en") {
-      headingElement.textContent = "English Documents";
-    } else {
-      headingElement.textContent = "अंग्रेजी कागजातहरू";
+    if (subjectKey === "english") {
+      headingElement.textContent =
+        lang === "en" ? "English Documents" : "अंग्रेजी कागजातहरू";
+    } else if (subjectKey === "science") {
+      headingElement.textContent =
+        lang === "en" ? "Science Documents" : "विज्ञान कागजातहरू";
     }
   }
 
