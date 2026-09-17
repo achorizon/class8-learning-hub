@@ -1,4 +1,3 @@
-```javascript
 const subjectKey = document.body.dataset.subject;
 
 const subjects = {
@@ -38,48 +37,122 @@ const subjects = {
 let lang = 'en';
 
 function render() {
+
+  if (!subjects[subjectKey]) {
+    console.error('Subject not found:', subjectKey);
+    return;
+  }
+
   const s = subjects[subjectKey][lang];
 
   document.documentElement.lang = lang === 'en' ? 'en' : 'ne';
 
   document.title = `${s.name} | Class 8 Learning Hub`;
 
-  document.getElementById('subjectName').textContent = s.name;
-  document.getElementById('subjectIntro').textContent = s.intro;
-  document.getElementById('subjectIcon').textContent = subjects[subjectKey].icon;
+  const subjectName = document.getElementById('subjectName');
+  const subjectIntro = document.getElementById('subjectIntro');
+  const subjectIcon = document.getElementById('subjectIcon');
+  const resourcesHeading = document.getElementById('resourcesHeading');
+  const backText = document.getElementById('backText');
+  const languageToggle = document.getElementById('languageToggle');
+  const resourceList = document.getElementById('resourceList');
 
-  document.getElementById('resourcesHeading').textContent =
-    lang === 'en' ? 'English Documents' : 'अंग्रेजी कागजातहरू';
+  if (subjectName) {
+    subjectName.textContent = s.name;
+  }
 
-  document.getElementById('backText').textContent =
-    lang === 'en' ? 'Back to all subjects' : 'सबै विषयमा फर्कनुहोस्';
+  if (subjectIntro) {
+    subjectIntro.textContent = s.intro;
+  }
 
-  document.getElementById('languageToggle').textContent =
-    lang === 'en' ? 'नेपाली' : 'English';
+  if (subjectIcon) {
+    subjectIcon.textContent = subjects[subjectKey].icon;
+  }
 
-  document.getElementById('resourceList').innerHTML = s.resources.map(r => `
-    <a href="${r[3]}" target="_blank" rel="noopener noreferrer" class="resource-item">
-      <span>${r[0]}</span>
-      <div>
-        <h3>${r[1]}</h3>
-        <p>${r[2]}</p>
-      </div>
-    </a>
-  `).join('');
+  if (resourcesHeading) {
+    resourcesHeading.textContent =
+      lang === 'en'
+        ? 'English Documents'
+        : 'अंग्रेजी कागजातहरू';
+  }
+
+  if (backText) {
+    backText.textContent =
+      lang === 'en'
+        ? 'Back to all subjects'
+        : 'सबै विषयमा फर्कनुहोस्';
+  }
+
+  if (languageToggle) {
+    languageToggle.textContent =
+      lang === 'en'
+        ? 'नेपाली'
+        : 'English';
+  }
+
+  if (resourceList) {
+
+    resourceList.innerHTML = s.resources.map(r => `
+      <a
+        href="${r[3]}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="resource-item"
+      >
+        <span>${r[0]}</span>
+
+        <div>
+          <h3>${r[1]}</h3>
+          <p>${r[2]}</p>
+        </div>
+      </a>
+    `).join('');
+
+  } else {
+    console.error('resourceList element not found.');
+  }
 }
 
-document.getElementById('languageToggle').addEventListener('click', () => {
-  lang = lang === 'en' ? 'np' : 'en';
-  render();
-});
 
-document.getElementById('year').textContent = new Date().getFullYear();
+/* Language button */
 
-document.querySelector('footer').children[0].lastChild.textContent =
-  ' AC HORIZON LEARNING HUB';
+const languageToggle = document.getElementById('languageToggle');
 
-document.querySelector('footer').children[1].textContent =
-  'Created by Aniket Chaudhary';
+if (languageToggle) {
+  languageToggle.addEventListener('click', () => {
+    lang = lang === 'en' ? 'np' : 'en';
+    render();
+  });
+}
+
+
+/* Footer year */
+
+const year = document.getElementById('year');
+
+if (year) {
+  year.textContent = new Date().getFullYear();
+}
+
+
+/* Footer text */
+
+const footer = document.querySelector('footer');
+
+if (footer) {
+
+  if (footer.children[0]) {
+    footer.children[0].lastChild.textContent =
+      ' AC HORIZON LEARNING HUB';
+  }
+
+  if (footer.children[1]) {
+    footer.children[1].textContent =
+      'Created by Aniket Chaudhary';
+  }
+}
+
+
+/* Start */
 
 render();
-```
