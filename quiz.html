@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,6 @@
   <title>Quiz | Class 8 Learning Hub</title>
 
   <link rel="icon" type="image/png" href="favicon.png">
-
   <link rel="stylesheet" href="style.css">
 
   <style>
@@ -72,10 +72,15 @@
       background: white;
       cursor: pointer;
       font-size: 16px;
+      transition: 0.2s;
     }
 
     .option:hover {
       background: #fff5ef;
+    }
+
+    .option:disabled {
+      cursor: default;
     }
 
     .option.correct {
@@ -102,6 +107,135 @@
       background: #fff5ef;
       margin-top: 20px;
     }
+
+    .progress-dashboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 25px auto;
+      max-width: 900px;
+    }
+
+    .dashboard-card {
+      padding: 20px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid #eee;
+      text-align: center;
+    }
+
+    .dashboard-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .dashboard-number {
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .dashboard-label {
+      font-size: 14px;
+      margin-top: 5px;
+      opacity: 0.75;
+    }
+
+    .history-item,
+    .leaderboard-item {
+      padding: 16px;
+      margin: 10px 0;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      background: white;
+    }
+
+    .history-item strong,
+    .leaderboard-item strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .history-score {
+      font-weight: 700;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .rank {
+      font-size: 20px;
+      font-weight: 700;
+      min-width: 40px;
+    }
+
+    .leader-info {
+      flex: 1;
+    }
+
+    .leader-score {
+      font-weight: 700;
+    }
+
+    .empty-history {
+      text-align: center;
+      padding: 20px;
+      opacity: 0.7;
+    }
+
+    .firebase-status {
+      text-align: center;
+      font-size: 13px;
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 600px) {
+
+      .quiz-subjects {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .subject-card {
+        padding: 18px 10px;
+      }
+
+      .subject-icon {
+        font-size: 30px;
+      }
+
+      .subject-card h3 {
+        font-size: 15px;
+      }
+
+      .quiz-box {
+        padding: 18px;
+        margin: 20px 10px;
+      }
+
+      .quiz-top {
+        flex-direction: column;
+      }
+
+      .option {
+        font-size: 15px;
+        padding: 14px;
+      }
+
+      .progress-dashboard {
+        grid-template-columns: 1fr;
+        margin: 20px 10px;
+      }
+
+      .leaderboard-item {
+        padding: 13px;
+      }
+
+    }
   </style>
 
 </head>
@@ -113,10 +247,12 @@
   <a class="brand" href="index.html">
     <span class="brand-mark">8</span>
 
+```
 <span>
   <strong>Class 8</strong>
   <small>Learn · Grow · Shine</small>
 </span>
+```
 
   </a>
 
@@ -136,6 +272,7 @@
 
   <section class="hero">
 
+```
 <div class="hero-copy">
 
   <p class="eyebrow">TEST YOUR KNOWLEDGE</p>
@@ -164,6 +301,41 @@
   </div>
 
 </div>
+```
+
+  </section>
+
+  <!-- PROGRESS -->
+
+  <section class="section">
+
+```
+<div class="progress-dashboard">
+
+  <div class="dashboard-card">
+    <div class="dashboard-icon">🔥</div>
+    <div class="dashboard-number" id="streakNumber">0</div>
+    <div class="dashboard-label">Day Streak</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-icon">📝</div>
+    <div class="dashboard-number" id="totalQuizNumber">0</div>
+    <div class="dashboard-label">Quizzes Completed</div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-icon">⭐</div>
+    <div class="dashboard-number" id="totalScoreNumber">0</div>
+    <div class="dashboard-label">Total Correct</div>
+  </div>
+
+</div>
+
+<div class="firebase-status" id="firebaseStatus">
+  Connecting to Firebase...
+</div>
+```
 
   </section>
 
@@ -171,6 +343,7 @@
 
   <section class="section" id="subjectSection">
 
+```
 <div class="section-heading">
 
   <p class="eyebrow">CHOOSE A SUBJECT</p>
@@ -190,6 +363,7 @@
   Maximum 10 questions per subject per Nepal calendar day.
   You can practice all 7 subjects on the same day.
 </div>
+```
 
   </section>
 
@@ -197,6 +371,7 @@
 
   <section class="section" id="quizSection" style="display:none;">
 
+```
 <div class="section-heading">
 
   <p class="eyebrow" id="quizSubjectName">
@@ -239,7 +414,7 @@
   </button>
 
 </div>
-
+```
 
   </section>
 
@@ -247,6 +422,7 @@
 
   <section class="section" id="resultSection" style="display:none;">
 
+```
 <div class="section-heading">
 
   <p class="eyebrow">QUIZ COMPLETE</p>
@@ -269,12 +445,61 @@
 
   <a
     class="button button-light"
-    href="index.html"
+    href="#historySection"
   >
-    Back to Home
+    View History
   </a>
 
 </div>
+```
+
+  </section>
+
+  <!-- HISTORY -->
+
+  <section class="section" id="historySection">
+
+```
+<div class="section-heading">
+
+  <p class="eyebrow">YOUR PROGRESS</p>
+
+  <h2>📚 Quiz History</h2>
+
+  <p id="streakText">
+    🔥 Streak: 0 days
+  </p>
+
+</div>
+
+<div class="quiz-box" id="historyList">
+  <p>Loading your quiz history...</p>
+</div>
+```
+
+  </section>
+
+  <!-- LEADERBOARD -->
+
+  <section class="section" id="leaderboardSection">
+
+```
+<div class="section-heading">
+
+  <p class="eyebrow">TOP STUDENTS</p>
+
+  <h2>🏆 Leaderboard</h2>
+
+  <p>
+    Quiz performance leaderboard
+  </p>
+
+</div>
+
+<div class="quiz-box" id="leaderboardList">
+  <p>Loading leaderboard...</p>
+</div>
+```
 
   </section>
 
@@ -293,24 +518,558 @@
 
 </footer>
 
-<script>
+<!-- FIREBASE CONNECTION -->
 
-  <script type="module">
-  import { auth, db } from "./firebase-review.js";
+<script type="module">
+
+  import {
+    auth,
+    db
+  } from "./firebase-review.js";
+
+  import {
+    collection,
+    addDoc,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
 
   window.quizFirebase = {
     auth: auth,
     db: db
   };
 
-  console.log("Quiz Firebase Connected");
+
+  window.quizFirebaseFunctions = {
+
+    saveResult: async function(data) {
+
+      try {
+
+        if (!auth.currentUser) {
+          console.log("Firebase user not ready.");
+          return;
+        }
+
+        await addDoc(
+          collection(db, "quizResults"),
+          {
+            uid: auth.currentUser.uid,
+            subject: data.subject,
+            score: data.score,
+            total: data.total,
+            date: data.date,
+            timestamp: Date.now()
+          }
+        );
+
+        console.log("Quiz result saved to Firebase.");
+
+        loadFirebaseHistory();
+        loadLeaderboard();
+
+      } catch (error) {
+
+        console.error(
+          "Quiz result save error:",
+          error
+        );
+
+      }
+
+    }
+
+  };
+
+
+  async function loadFirebaseHistory() {
+
+    var box =
+      document.getElementById("historyList");
+
+    try {
+
+      if (!auth.currentUser) {
+        box.innerHTML =
+          "<p>Connecting to Firebase...</p>";
+        return;
+      }
+
+      var snapshot =
+        await getDocs(
+          collection(db, "quizResults")
+        );
+
+      var results = [];
+
+      snapshot.forEach(function(doc) {
+
+        var data = doc.data();
+
+        if (
+          data.uid === auth.currentUser.uid
+        ) {
+
+          results.push(data);
+
+        }
+
+      });
+
+      results.sort(function(a, b) {
+
+        return (
+          (b.timestamp || 0) -
+          (a.timestamp || 0)
+        );
+
+      });
+
+
+      if (results.length === 0) {
+
+        box.innerHTML =
+          '<div class="empty-history">' +
+          'No quiz history yet.<br>' +
+          'Complete your first quiz to see it here.' +
+          '</div>';
+
+        updateDashboard(results);
+
+        return;
+
+      }
+
+
+      var html = "";
+
+      for (
+        var i = 0;
+        i < results.length;
+        i++
+      ) {
+
+        var item = results[i];
+
+        html +=
+          '<div class="history-item">' +
+
+          '<strong>' +
+          "📘 " +
+          escapeHTML(item.subject) +
+          '</strong>' +
+
+          '<div class="history-score">' +
+          'Score: ' +
+          Number(item.score || 0) +
+          ' / ' +
+          Number(item.total || 0) +
+          '</div>' +
+
+          '<small>' +
+          escapeHTML(item.date || "") +
+          '</small>' +
+
+          '</div>';
+
+      }
+
+      box.innerHTML = html;
+
+      calculateStreak(results);
+      updateDashboard(results);
+
+    } catch (error) {
+
+      console.error(
+        "History loading error:",
+        error
+      );
+
+      box.innerHTML =
+        '<div class="empty-history">' +
+        'History could not be loaded right now.' +
+        '</div>';
+
+    }
+
+  }
+
+
+  async function loadLeaderboard() {
+
+    var box =
+      document.getElementById(
+        "leaderboardList"
+      );
+
+    try {
+
+      var snapshot =
+        await getDocs(
+          collection(db, "quizResults")
+        );
+
+      var players = {};
+
+      snapshot.forEach(function(doc) {
+
+        var data = doc.data();
+
+        var uid = data.uid;
+
+        if (!players[uid]) {
+
+          players[uid] = {
+            score: 0,
+            total: 0
+          };
+
+        }
+
+        players[uid].score +=
+          Number(data.score || 0);
+
+        players[uid].total +=
+          Number(data.total || 0);
+
+      });
+
+
+      var list = [];
+
+      for (var uid in players) {
+
+        list.push({
+          uid: uid,
+          score: players[uid].score,
+          total: players[uid].total
+        });
+
+      }
+
+
+      list.sort(function(a, b) {
+
+        var aPercent =
+          a.total > 0 ?
+          a.score / a.total :
+          0;
+
+        var bPercent =
+          b.total > 0 ?
+          b.score / b.total :
+          0;
+
+        if (bPercent !== aPercent) {
+          return bPercent - aPercent;
+        }
+
+        return b.score - a.score;
+
+      });
+
+
+      if (list.length === 0) {
+
+        box.innerHTML =
+          '<div class="empty-history">' +
+          'No leaderboard data yet.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      var html = "";
+
+      var limit =
+        Math.min(list.length, 20);
+
+      for (
+        var i = 0;
+        i < limit;
+        i++
+      ) {
+
+        var player = list[i];
+
+        var percentage =
+          player.total > 0 ?
+          Math.round(
+            player.score /
+            player.total *
+            100
+          ) :
+          0;
+
+        var isCurrentUser =
+          auth.currentUser &&
+          player.uid === auth.currentUser.uid;
+
+        html +=
+          '<div class="leaderboard-item">' +
+
+          '<span class="rank">' +
+          getRankEmoji(i + 1) +
+          '</span>' +
+
+          '<div class="leader-info">' +
+
+          '<strong>' +
+          (
+            isCurrentUser
+            ? "You"
+            : "Student " +
+              player.uid.slice(-5)
+          ) +
+          '</strong>' +
+
+          '<small>' +
+          percentage +
+          '% accuracy' +
+          '</small>' +
+
+          '</div>' +
+
+          '<span class="leader-score">' +
+          player.score +
+          ' / ' +
+          player.total +
+          '</span>' +
+
+          '</div>';
+
+      }
+
+      box.innerHTML = html;
+
+    } catch (error) {
+
+      console.error(
+        "Leaderboard loading error:",
+        error
+      );
+
+      box.innerHTML =
+        '<div class="empty-history">' +
+        'Leaderboard could not be loaded right now.' +
+        '</div>';
+
+    }
+
+  }
+
+
+  function getRankEmoji(rank) {
+
+    if (rank === 1) return "🥇";
+    if (rank === 2) return "🥈";
+    if (rank === 3) return "🥉";
+
+    return "#" + rank;
+
+  }
+
+
+  function calculateStreak(results) {
+
+    var dates = [];
+
+    for (
+      var i = 0;
+      i < results.length;
+      i++
+    ) {
+
+      var date = results[i].date;
+
+      if (
+        date &&
+        dates.indexOf(date) === -1
+      ) {
+
+        dates.push(date);
+
+      }
+
+    }
+
+
+    dates.sort().reverse();
+
+
+    var today =
+      getNepalDateForFirebase();
+
+
+    var streak = 0;
+
+    var check =
+      new Date(
+        today + "T00:00:00"
+      );
+
+
+    for (
+      var i = 0;
+      i < dates.length;
+      i++
+    ) {
+
+      var expected =
+        formatDate(check);
+
+      if (dates[i] === expected) {
+
+        streak++;
+
+        check.setDate(
+          check.getDate() - 1
+        );
+
+      } else {
+
+        break;
+
+      }
+
+    }
+
+
+    document.getElementById(
+      "streakNumber"
+    ).textContent = streak;
+
+    document.getElementById(
+      "streakText"
+    ).textContent =
+      "🔥 Streak: " +
+      streak +
+      " day" +
+      (streak === 1 ? "" : "s");
+
+  }
+
+
+  function updateDashboard(results) {
+
+    var quizCount =
+      results.length;
+
+    var totalCorrect = 0;
+
+    for (
+      var i = 0;
+      i < results.length;
+      i++
+    ) {
+
+      totalCorrect +=
+        Number(results[i].score || 0);
+
+    }
+
+    document.getElementById(
+      "totalQuizNumber"
+    ).textContent = quizCount;
+
+    document.getElementById(
+      "totalScoreNumber"
+    ).textContent = totalCorrect;
+
+  }
+
+
+  function getNepalDateForFirebase() {
+
+    return new Intl.DateTimeFormat(
+      "en-CA",
+      {
+        timeZone: "Asia/Kathmandu",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      }
+    ).format(new Date());
+
+  }
+
+
+  function formatDate(date) {
+
+    var year =
+      date.getFullYear();
+
+    var month =
+      String(
+        date.getMonth() + 1
+      ).padStart(2, "0");
+
+    var day =
+      String(
+        date.getDate()
+      ).padStart(2, "0");
+
+    return (
+      year +
+      "-" +
+      month +
+      "-" +
+      day
+    );
+
+  }
+
+
+  function escapeHTML(value) {
+
+    var div =
+      document.createElement("div");
+
+    div.textContent =
+      String(value);
+
+    return div.innerHTML;
+
+  }
+
+
+  function startFirebase() {
+
+    if (auth.currentUser) {
+
+      document.getElementById(
+        "firebaseStatus"
+      ).textContent =
+        "☁️ Firebase Connected";
+
+      loadFirebaseHistory();
+      loadLeaderboard();
+
+      return;
+
+    }
+
+    setTimeout(
+      startFirebase,
+      500
+    );
+
+  }
+
+
+  startFirebase();
+
 </script>
 
-  /* =========================
-     BASIC SETTINGS
-  ========================= */
+<!-- QUIZ SYSTEM -->
+
+<script>
 
   var DAILY_LIMIT = 10;
+
 
   var subjects = {
 
@@ -376,7 +1135,6 @@
       ]
     },
 
-
     nepali: {
       name: "Nepali",
       icon: "📕",
@@ -433,7 +1191,6 @@
         }
       ]
     },
-
 
     mathematics: {
       name: "Mathematics",
@@ -492,7 +1249,6 @@
       ]
     },
 
-
     science: {
       name: "Science",
       icon: "🔬",
@@ -549,7 +1305,6 @@
         }
       ]
     },
-
 
     social: {
       name: "Social Studies",
@@ -612,7 +1367,6 @@
         }
       ]
     },
-
 
     computer: {
       name: "Computer",
@@ -690,7 +1444,6 @@
         }
       ]
     },
-
 
     health: {
       name: "Health & Physical Education",
@@ -772,47 +1525,58 @@
   };
 
 
-  /* =========================
-     VARIABLES
-  ========================= */
-
-  var progressKey = "class8QuizProgress";
+  var progressKey =
+    "class8QuizProgress";
 
   var currentSubject = "";
   var currentQuestions = [];
   var currentQuestionIndex = 0;
   var score = 0;
   var answered = false;
+  var resultSaved = false;
 
 
-  /* =========================
-     ELEMENTS
-  ========================= */
+  var subjectList =
+    document.getElementById("subjectList");
 
-  var subjectList = document.getElementById("subjectList");
-  var subjectSection = document.getElementById("subjectSection");
-  var quizSection = document.getElementById("quizSection");
-  var resultSection = document.getElementById("resultSection");
+  var subjectSection =
+    document.getElementById("subjectSection");
 
-  var quizSubjectName = document.getElementById("quizSubjectName");
-  var questionNumber = document.getElementById("questionNumber");
-  var progressText = document.getElementById("progressText");
-  var scoreText = document.getElementById("scoreText");
-  var questionText = document.getElementById("questionText");
-  var optionsBox = document.getElementById("options");
-  var nextButton = document.getElementById("nextButton");
+  var quizSection =
+    document.getElementById("quizSection");
 
-  var resultText = document.getElementById("resultText");
-  var chooseAgainButton = document.getElementById("chooseAgainButton");
+  var resultSection =
+    document.getElementById("resultSection");
 
+  var quizSubjectName =
+    document.getElementById("quizSubjectName");
 
-  /* =========================
-     DATE
-  ========================= */
+  var questionNumber =
+    document.getElementById("questionNumber");
+
+  var progressText =
+    document.getElementById("progressText");
+
+  var scoreText =
+    document.getElementById("scoreText");
+
+  var questionText =
+    document.getElementById("questionText");
+
+  var optionsBox =
+    document.getElementById("options");
+
+  var nextButton =
+    document.getElementById("nextButton");
+
+  var resultText =
+    document.getElementById("resultText");
+
+  var chooseAgainButton =
+    document.getElementById("chooseAgainButton");
+
 
   function getNepalDate() {
-
-    var now = new Date();
 
     return new Intl.DateTimeFormat(
       "en-CA",
@@ -822,31 +1586,36 @@
         month: "2-digit",
         day: "2-digit"
       }
-    ).format(now);
+    ).format(new Date());
 
   }
 
 
-  /* =========================
-     LOAD PROGRESS
-  ========================= */
-
   function getProgress() {
 
-    var saved = localStorage.getItem(progressKey);
+    var saved =
+      localStorage.getItem(
+        progressKey
+      );
 
     if (!saved) {
+
       return {
         date: getNepalDate(),
         counts: {}
       };
+
     }
 
     try {
 
-      var data = JSON.parse(saved);
+      var data =
+        JSON.parse(saved);
 
-      if (data.date !== getNepalDate()) {
+      if (
+        data.date !==
+        getNepalDate()
+      ) {
 
         return {
           date: getNepalDate(),
@@ -873,10 +1642,6 @@
   }
 
 
-  /* =========================
-     SAVE PROGRESS
-  ========================= */
-
   function saveProgress(data) {
 
     localStorage.setItem(
@@ -887,28 +1652,36 @@
   }
 
 
-  /* =========================
-     SUBJECT LIST
-  ========================= */
-
   function showSubjects() {
 
     subjectList.innerHTML = "";
 
-    var progress = getProgress();
+    var progress =
+      getProgress();
 
-    for (var key in subjects) {
+    for (
+      var key in subjects
+    ) {
 
-      var subject = subjects[key];
+      var subject =
+        subjects[key];
 
-      var count = progress.counts[key] || 0;
+      var count =
+        progress.counts[key] || 0;
 
-      var card = document.createElement("div");
+      var card =
+        document.createElement("div");
 
-      card.className = "subject-card";
+      card.className =
+        "subject-card";
 
-      if (count >= DAILY_LIMIT) {
-        card.className += " locked";
+      if (
+        count >= DAILY_LIMIT
+      ) {
+
+        card.className +=
+          " locked";
+
       }
 
       card.innerHTML =
@@ -927,36 +1700,47 @@
         ' questions today' +
         '</div>';
 
-      if (count < DAILY_LIMIT) {
+      if (
+        count < DAILY_LIMIT
+      ) {
 
-        card.onclick = function(subjectKey) {
+        card.onclick =
+          function(subjectKey) {
 
-          return function() {
-            startQuiz(subjectKey);
-          };
+            return function() {
 
-        }(key);
+              startQuiz(
+                subjectKey
+              );
+
+            };
+
+          }(key);
 
       }
 
-      subjectList.appendChild(card);
+      subjectList.appendChild(
+        card
+      );
 
     }
 
   }
 
 
-  /* =========================
-     START QUIZ
-  ========================= */
-
   function startQuiz(subjectKey) {
 
-    var progress = getProgress();
+    var progress =
+      getProgress();
 
-    var used = progress.counts[subjectKey] || 0;
+    var used =
+      progress.counts[
+        subjectKey
+      ] || 0;
 
-    if (used >= DAILY_LIMIT) {
+    if (
+      used >= DAILY_LIMIT
+    ) {
 
       alert(
         "You have already completed 10 questions in this subject today."
@@ -966,10 +1750,13 @@
 
     }
 
-    currentSubject = subjectKey;
+    currentSubject =
+      subjectKey;
 
     currentQuestions =
-      subjects[subjectKey].questions.slice(
+      subjects[
+        subjectKey
+      ].questions.slice(
         used,
         DAILY_LIMIT
       );
@@ -977,15 +1764,25 @@
     currentQuestionIndex = 0;
     score = 0;
     answered = false;
+    resultSaved = false;
 
-    subjectSection.style.display = "none";
-    resultSection.style.display = "none";
-    quizSection.style.display = "block";
+    subjectSection.style.display =
+      "none";
+
+    resultSection.style.display =
+      "none";
+
+    quizSection.style.display =
+      "block";
 
     quizSubjectName.textContent =
-      subjects[subjectKey].icon +
+      subjects[
+        subjectKey
+      ].icon +
       " " +
-      subjects[subjectKey].name;
+      subjects[
+        subjectKey
+      ].name;
 
     showQuestion();
 
@@ -995,10 +1792,6 @@
 
   }
 
-
-  /* =========================
-     SHOW QUESTION
-  ========================= */
 
   function showQuestion() {
 
@@ -1014,7 +1807,9 @@
     }
 
     var question =
-      currentQuestions[currentQuestionIndex];
+      currentQuestions[
+        currentQuestionIndex
+      ];
 
     answered = false;
 
@@ -1046,11 +1841,15 @@
     ) {
 
       var button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
 
-      button.type = "button";
+      button.type =
+        "button";
 
-      button.className = "option";
+      button.className =
+        "option";
 
       button.textContent =
         question.options[i];
@@ -1061,18 +1860,19 @@
           question.answer
         );
 
-      optionsBox.appendChild(button);
+      optionsBox.appendChild(
+        button
+      );
 
     }
 
   }
 
 
-  /* =========================
-     ANSWER
-  ========================= */
-
-  function createAnswerHandler(selected, correct) {
+  function createAnswerHandler(
+    selected,
+    correct
+  ) {
 
     return function() {
 
@@ -1083,7 +1883,9 @@
       answered = true;
 
       var optionButtons =
-        optionsBox.querySelectorAll(".option");
+        optionsBox.querySelectorAll(
+          ".option"
+        );
 
       for (
         var i = 0;
@@ -1091,83 +1893,108 @@
         i++
       ) {
 
-        optionButtons[i].disabled = true;
+        optionButtons[i].disabled =
+          true;
 
-        if (i === correct) {
-          optionButtons[i].classList.add("correct");
+        if (
+          i === correct
+        ) {
+
+          optionButtons[i]
+            .classList
+            .add("correct");
+
         }
 
         if (
           i === selected &&
           selected !== correct
         ) {
-          optionButtons[i].classList.add("wrong");
+
+          optionButtons[i]
+            .classList
+            .add("wrong");
+
         }
 
       }
 
-      if (selected === correct) {
+      if (
+        selected === correct
+      ) {
+
         score++;
+
       }
 
       scoreText.textContent =
         "Score: " +
         score;
 
-      nextButton.disabled = false;
+      nextButton.disabled =
+        false;
 
     };
 
   }
 
 
-  /* =========================
-     NEXT QUESTION
-  ========================= */
+  nextButton.onclick =
+    function() {
 
-  nextButton.onclick = function() {
+      if (!answered) {
+        return;
+      }
 
-    if (!answered) {
-      return;
-    }
+      var progress =
+        getProgress();
 
-    var progress = getProgress();
+      var currentCount =
+        progress.counts[
+          currentSubject
+        ] || 0;
 
-    var currentCount =
-      progress.counts[currentSubject] || 0;
+      if (
+        currentCount <
+        DAILY_LIMIT
+      ) {
 
-    if (currentCount < DAILY_LIMIT) {
+        progress.counts[
+          currentSubject
+        ] =
+          currentCount + 1;
 
-      progress.counts[currentSubject] =
-        currentCount + 1;
+      }
 
-    }
+      progress.date =
+        getNepalDate();
 
-    progress.date = getNepalDate();
+      saveProgress(
+        progress
+      );
 
-    saveProgress(progress);
+      currentQuestionIndex++;
 
-    currentQuestionIndex++;
+      showQuestion();
 
-    showQuestion();
+    };
 
-  };
-
-
-  /* =========================
-     FINISH
-  ========================= */
 
   function finishQuiz() {
 
-    quizSection.style.display = "none";
+    quizSection.style.display =
+      "none";
 
-    resultSection.style.display = "block";
+    resultSection.style.display =
+      "block";
 
-    var progress = getProgress();
+    var progress =
+      getProgress();
 
     var totalToday =
-      progress.counts[currentSubject] || 0;
+      progress.counts[
+        currentSubject
+      ] || 0;
 
     resultText.textContent =
       "You scored " +
@@ -1179,7 +2006,9 @@
       " / " +
       DAILY_LIMIT +
       " questions in " +
-      subjects[currentSubject].name +
+      subjects[
+        currentSubject
+      ].name +
       " today.";
 
     showSubjects();
@@ -1188,39 +2017,61 @@
       behavior: "smooth"
     });
 
+
+    if (
+      !resultSaved &&
+      window.quizFirebaseFunctions
+    ) {
+
+      resultSaved = true;
+
+      window.quizFirebaseFunctions
+        .saveResult({
+
+          subject:
+            subjects[
+              currentSubject
+            ].name,
+
+          score:
+            score,
+
+          total:
+            currentQuestions.length,
+
+          date:
+            getNepalDate()
+
+        });
+
+    }
+
   }
 
 
-  /* =========================
-     CHOOSE AGAIN
-  ========================= */
+  chooseAgainButton.onclick =
+    function() {
 
-  chooseAgainButton.onclick = function() {
+      resultSection.style.display =
+        "none";
 
-    resultSection.style.display = "none";
+      subjectSection.style.display =
+        "block";
 
-    subjectSection.style.display = "block";
+      showSubjects();
 
-    showSubjects();
+      subjectSection.scrollIntoView({
+        behavior: "smooth"
+      });
 
-    subjectSection.scrollIntoView({
-      behavior: "smooth"
-    });
-
-  };
+    };
 
 
-  /* =========================
-     YEAR
-  ========================= */
-
-  document.getElementById("year").textContent =
+  document.getElementById(
+    "year"
+  ).textContent =
     new Date().getFullYear();
 
-
-  /* =========================
-     START PAGE
-  ========================= */
 
   showSubjects();
 
