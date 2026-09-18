@@ -295,6 +295,17 @@
 
 <script>
 
+  <script type="module">
+  import { auth, db } from "./firebase-review.js";
+
+  window.quizFirebase = {
+    auth: auth,
+    db: db
+  };
+
+  console.log("Quiz Firebase Connected");
+</script>
+
   /* =========================
      BASIC SETTINGS
   ========================= */
