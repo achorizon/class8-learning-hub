@@ -1,5 +1,5 @@
-```html
 <!doctype html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -18,244 +18,894 @@
   />
 
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .quiz-subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .quiz-subject-card {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      padding: 22px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
+    }
+
+    .quiz-subject-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .quiz-subject-card.locked {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .quiz-subject-icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .quiz-subject-card h3 {
+      margin: 5px 0;
+    }
+
+    .quiz-progress {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.75;
+    }
+
+    .quiz-limit-message {
+      margin-top: 20px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: #fff4ed;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .quiz-question-box {
+      padding: 25px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .quiz-option {
+      width: 100%;
+      display: block;
+      text-align: left;
+      padding: 14px 16px;
+      margin: 10px 0;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s ease;
+    }
+
+    .quiz-option:hover {
+      transform: translateX(2px);
+    }
+
+    .quiz-option.selected {
+      border-width: 2px;
+    }
+
+    .quiz-option.correct {
+      border-width: 2px;
+    }
+
+    .quiz-option.wrong {
+      border-width: 2px;
+    }
+
+    .quiz-score {
+      font-size: 42px;
+      font-weight: 700;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .quiz-date-info {
+      text-align: center;
+      margin-top: 10px;
+      opacity: 0.75;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-subject-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .quiz-question-box {
+        padding: 18px;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
 
   <header class="site-header">
 
-    <a
-      class="brand"
-      href="index.html"
-      aria-label="Class 8 Learning Hub home"
-    >
-      <span class="brand-mark">8</span>
+```
+<a
+  class="brand"
+  href="index.html"
+  aria-label="Class 8 Learning Hub home"
+>
+  <span class="brand-mark">8</span>
 
-      <span>
-        <strong>Class 8</strong>
-        <small>Learn · Grow · Shine</small>
-      </span>
-    </a>
+  <span>
+    <strong>Class 8</strong>
+    <small>Learn · Grow · Shine</small>
+  </span>
+</a>
 
+<nav aria-label="Main navigation">
+  <a href="index.html">Home</a>
+  <a href="index.html#subjects">Subjects</a>
+  <a href="index.html#notice">Notices</a>
+</nav>
 
-    <nav aria-label="Main navigation">
-
-      <a href="index.html">Home</a>
-
-      <a href="index.html#subjects">Subjects</a>
-
-      <a href="index.html#notice">Notices</a>
-
-    </nav>
-
-
-    <a
-      class="language-toggle"
-      href="index.html"
-      style="text-decoration: none;"
-    >
-      Home
-    </a>
+<a
+  class="language-toggle"
+  href="index.html"
+  style="text-decoration: none;"
+>
+  Home
+</a>
+```
 
   </header>
 
-
   <main>
 
-    <section class="hero">
+```
+<!-- QUIZ INTRO -->
+<section class="hero">
 
-      <div class="hero-copy">
+  <div class="hero-copy">
 
-        <p class="eyebrow">
-          TEST YOUR KNOWLEDGE
-        </p>
+    <p class="eyebrow">
+      TEST YOUR KNOWLEDGE
+    </p>
 
-        <h1>
-          Class 8 Quiz
-        </h1>
+    <h1>
+      Class 8 Quiz
+    </h1>
 
-        <p class="hero-text">
-          Practice your knowledge with questions from your Class 8 subjects.
-        </p>
+    <p class="hero-text">
+      Choose a subject and practice your Class 8 knowledge.
+    </p>
 
-        <div class="hero-actions">
+    <div class="quiz-date-info" id="dateInfo"></div>
 
-          <button
-            class="button button-primary"
-            type="button"
-            id="startQuizBtn"
-          >
-            Start Quiz
-          </button>
-
-          <a
-            class="button button-light"
-            href="index.html"
-          >
-            Back to Home
-          </a>
-
-        </div>
-
-      </div>
+  </div>
 
 
-      <div class="hero-card">
+  <div class="hero-card">
 
-        <span class="spark spark-one">✦</span>
-        <span class="spark spark-two">✦</span>
+    <span class="spark spark-one">✦</span>
+    <span class="spark spark-two">✦</span>
 
-        <div class="sun">?</div>
+    <div class="sun">?</div>
 
-        <div class="cloud cloud-one"></div>
-        <div class="cloud cloud-two"></div>
+    <div class="cloud cloud-one"></div>
+    <div class="cloud cloud-two"></div>
 
-        <div class="hill hill-back"></div>
-        <div class="hill hill-front"></div>
+    <div class="hill hill-back"></div>
+    <div class="hill hill-front"></div>
 
-        <div class="mini-note">
-          <span>📝</span>
-          <b>Learn. Practice. Improve.</b>
-        </div>
+    <div class="mini-note">
+      <span>📝</span>
+      <b>Learn. Practice. Improve.</b>
+    </div>
 
-      </div>
+  </div>
 
-    </section>
+</section>
 
 
-    <section
-      class="section"
-      id="quizSection"
-      style="display: none;"
-    >
+<!-- SUBJECT SELECTION -->
+<section class="section" id="subjectSection">
 
-      <div class="section-heading">
+  <div class="section-heading">
 
-        <p class="eyebrow">
-          QUIZ
-        </p>
+    <p class="eyebrow">
+      CHOOSE A SUBJECT
+    </p>
 
-        <h2 id="quizTitle">
-          Get Ready!
-        </h2>
+    <h2>
+      Select Your Quiz
+    </h2>
 
-        <p id="quizDescription">
-          Your quiz will appear here.
-        </p>
+    <p>
+      You can answer up to 10 questions from each subject every day.
+    </p>
 
-      </div>
+  </div>
+
+
+  <div
+    class="quiz-subject-grid"
+    id="subjectGrid"
+  ></div>
+
+
+  <div
+    class="quiz-limit-message"
+    id="overallLimitMessage"
+    style="display: none;"
+  ></div>
+
+</section>
+
+
+<!-- QUIZ -->
+<section
+  class="section"
+  id="quizSection"
+  style="display: none;"
+>
+
+  <div class="section-heading">
+
+    <p class="eyebrow">
+      QUIZ
+    </p>
+
+    <h2 id="quizTitle">
+      Quiz
+    </h2>
+
+    <p id="quizDescription">
+      Answer the question.
+    </p>
+
+  </div>
+
+
+  <div class="quiz-container">
+
+    <div class="quiz-question-box">
+
+      <p id="questionNumber">
+        Question 1 of 10
+      </p>
+
+      <h3 id="questionText">
+        Loading question...
+      </h3>
 
 
       <div
-        class="quiz-container"
-        id="quizContainer"
-      >
-
-        <div class="quiz-question-box">
-
-          <p id="questionNumber">
-            Question 1
-          </p>
-
-          <h3 id="questionText">
-            Loading question...
-          </h3>
+        class="quiz-options"
+        id="quizOptions"
+      ></div>
 
 
-          <div
-            class="quiz-options"
-            id="quizOptions"
-          >
-          </div>
-
-
-          <div class="quiz-actions">
-
-            <button
-              class="button button-primary"
-              type="button"
-              id="nextQuestionBtn"
-              disabled
-            >
-              Next Question
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <section
-      class="section"
-      id="quizResult"
-      style="display: none;"
-    >
-
-      <div class="section-heading">
-
-        <p class="eyebrow">
-          QUIZ COMPLETE
-        </p>
-
-        <h2>
-          Your Result
-        </h2>
-
-        <p id="resultText">
-          Quiz completed.
-        </p>
-
-      </div>
-
-
-      <div class="hero-actions">
+      <div class="quiz-actions">
 
         <button
           class="button button-primary"
           type="button"
-          id="restartQuizBtn"
+          id="nextQuestionBtn"
+          disabled
         >
-          Try Again
+          Next Question
         </button>
-
-        <a
-          class="button button-light"
-          href="index.html"
-        >
-          Back to Home
-        </a>
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RESULT -->
+<section
+  class="section"
+  id="quizResult"
+  style="display: none;"
+>
+
+  <div class="section-heading">
+
+    <p class="eyebrow">
+      QUIZ COMPLETE
+    </p>
+
+    <h2>
+      Your Result
+    </h2>
+
+    <p id="resultSubject">
+      Subject
+    </p>
+
+  </div>
+
+
+  <div
+    class="quiz-score"
+    id="quizScore"
+  >
+    0 / 10
+  </div>
+
+
+  <div class="section-heading">
+
+    <p id="resultText">
+      Quiz completed.
+    </p>
+
+  </div>
+
+
+  <div class="hero-actions">
+
+    <button
+      class="button button-primary"
+      type="button"
+      id="backToSubjectsBtn"
+    >
+      Choose Another Subject
+    </button>
+
+    <a
+      class="button button-light"
+      href="index.html"
+    >
+      Back to Home
+    </a>
+
+  </div>
+
+</section>
+```
 
   </main>
 
-
   <footer>
 
-    <span>
-      © <span id="year"></span>
-      Class 8 Learning Hub
-    </span>
+```
+<span>
+  © <span id="year"></span>
+  Class 8 Learning Hub
+</span>
 
-    <span>
-      Made for curious minds.
-    </span>
+<span>
+  Made for curious minds.
+</span>
+```
 
   </footer>
 
-
   <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
 
-    const startQuizBtn =
-      document.getElementById("startQuizBtn");
+    /* ================================
+       BASIC SETTINGS
+    ================================= */
+
+    const DAILY_LIMIT = 10;
+
+    const SUBJECTS = {
+      english: {
+        name: "English",
+        icon: "📖"
+      },
+
+      nepali: {
+        name: "Nepali",
+        icon: "📚"
+      },
+
+      mathematics: {
+        name: "Mathematics",
+        icon: "➗"
+      },
+
+      science: {
+        name: "Science",
+        icon: "🔬"
+      },
+
+      social: {
+        name: "Social Studies",
+        icon: "🌍"
+      },
+
+      computer: {
+        name: "Computer",
+        icon: "💻"
+      },
+
+      health: {
+        name: "Health & Physical Education",
+        icon: "🏃"
+      }
+    };
+
+
+    /* ================================
+       QUESTION BANK
+    ================================= */
+
+    const QUESTION_BANK = {
+
+      english: [
+        {
+          question: "What is the past tense of 'go'?",
+          options: ["Goed", "Went", "Gone", "Going"],
+          answer: 1
+        },
+        {
+          question: "Which word is a noun?",
+          options: ["Beautiful", "Quickly", "School", "Run"],
+          answer: 2
+        },
+        {
+          question: "What is the opposite of 'ancient'?",
+          options: ["Old", "Modern", "Past", "Early"],
+          answer: 1
+        },
+        {
+          question: "Which sentence is in the present continuous tense?",
+          options: [
+            "I play football.",
+            "I played football.",
+            "I am playing football.",
+            "I will play football."
+          ],
+          answer: 2
+        },
+        {
+          question: "What is the plural of 'child'?",
+          options: ["Childs", "Childes", "Children", "Childrens"],
+          answer: 2
+        },
+        {
+          question: "Which word is an adjective?",
+          options: ["Beauty", "Beautiful", "Beautifully", "Beautify"],
+          answer: 1
+        },
+        {
+          question: "What is the comparative form of 'good'?",
+          options: ["Gooder", "Best", "Better", "More good"],
+          answer: 2
+        },
+        {
+          question: "Which punctuation mark ends a question?",
+          options: [".", ",", "!", "?"],
+          answer: 3
+        },
+        {
+          question: "What is the synonym of 'happy'?",
+          options: ["Sad", "Joyful", "Angry", "Weak"],
+          answer: 1
+        },
+        {
+          question: "Which one is a pronoun?",
+          options: ["Ram", "Book", "He", "School"],
+          answer: 2
+        }
+      ],
+
+
+      nepali: [
+        {
+          question: "‘राम’ कुन शब्द हो?",
+          options: ["सर्वनाम", "नाम", "क्रिया", "विशेषण"],
+          answer: 1
+        },
+        {
+          question: "‘राम्रो’ कुन शब्द हो?",
+          options: ["विशेषण", "क्रिया", "सर्वनाम", "नाम"],
+          answer: 0
+        },
+        {
+          question: "‘म विद्यालय जान्छु।’ वाक्यमा क्रिया कुन हो?",
+          options: ["म", "विद्यालय", "जान्छु", "वाक्य"],
+          answer: 2
+        },
+        {
+          question: "‘दिन’ को विपरीतार्थक शब्द कुन हो?",
+          options: ["बिहान", "रात", "समय", "साँझ"],
+          answer: 1
+        },
+        {
+          question: "‘आमा’ को पर्यायवाची शब्द कुन हो?",
+          options: ["माता", "बहिनी", "छोरी", "दिदी"],
+          answer: 0
+        },
+        {
+          question: "‘ऊ’ कुन शब्द हो?",
+          options: ["नाम", "सर्वनाम", "विशेषण", "क्रिया"],
+          answer: 1
+        },
+        {
+          question: "नेपाली वर्णमालामा स्वर वर्ण कुन हो?",
+          options: ["क", "च", "अ", "त"],
+          answer: 2
+        },
+        {
+          question: "‘सुन्दर फूल’ मा ‘सुन्दर’ कुन शब्द हो?",
+          options: ["नाम", "क्रिया", "विशेषण", "सर्वनाम"],
+          answer: 2
+        },
+        {
+          question: "‘हामी’ को एकवचन कुन हो?",
+          options: ["म", "तिमी", "उनी", "तपाईं"],
+          answer: 0
+        },
+        {
+          question: "‘छिटो’ को विपरीतार्थक शब्द कुन हो?",
+          options: ["ढिलो", "ठूलो", "सानो", "नजिक"],
+          answer: 0
+        }
+      ],
+
+
+      mathematics: [
+        {
+          question: "What is 12 × 8?",
+          options: ["86", "96", "108", "88"],
+          answer: 1
+        },
+        {
+          question: "What is the square of 9?",
+          options: ["18", "27", "81", "72"],
+          answer: 2
+        },
+        {
+          question: "What is 144 ÷ 12?",
+          options: ["10", "11", "12", "14"],
+          answer: 2
+        },
+        {
+          question: "What is 25% of 200?",
+          options: ["25", "40", "50", "75"],
+          answer: 2
+        },
+        {
+          question: "What is the value of 5²?",
+          options: ["10", "15", "20", "25"],
+          answer: 3
+        },
+        {
+          question: "Which number is a prime number?",
+          options: ["21", "27", "29", "35"],
+          answer: 2
+        },
+        {
+          question: "What is 3/4 as a decimal?",
+          options: ["0.25", "0.50", "0.75", "1.25"],
+          answer: 2
+        },
+        {
+          question: "What is the perimeter of a square with side 5 cm?",
+          options: ["10 cm", "15 cm", "20 cm", "25 cm"],
+          answer: 2
+        },
+        {
+          question: "What is 2³?",
+          options: ["6", "8", "9", "12"],
+          answer: 1
+        },
+        {
+          question: "What is the HCF of 12 and 18?",
+          options: ["2", "3", "6", "9"],
+          answer: 2
+        }
+      ],
+
+
+      science: [
+        {
+          question: "Which organ pumps blood around the human body?",
+          options: ["Lungs", "Heart", "Kidney", "Brain"],
+          answer: 1
+        },
+        {
+          question: "What gas do plants mainly use for photosynthesis?",
+          options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+          answer: 2
+        },
+        {
+          question: "What is the SI unit of force?",
+          options: ["Joule", "Watt", "Newton", "Pascal"],
+          answer: 2
+        },
+        {
+          question: "Which planet is known as the Red Planet?",
+          options: ["Earth", "Mars", "Venus", "Jupiter"],
+          answer: 1
+        },
+        {
+          question: "Water boils at what temperature at normal pressure?",
+          options: ["50°C", "75°C", "100°C", "150°C"],
+          answer: 2
+        },
+        {
+          question: "Which part of a plant absorbs water from soil?",
+          options: ["Leaf", "Flower", "Root", "Fruit"],
+          answer: 2
+        },
+        {
+          question: "Which is a renewable source of energy?",
+          options: ["Coal", "Petroleum", "Solar energy", "Natural gas"],
+          answer: 2
+        },
+        {
+          question: "What is the basic unit of life?",
+          options: ["Tissue", "Organ", "Cell", "Bone"],
+          answer: 2
+        },
+        {
+          question: "Which force pulls objects toward Earth?",
+          options: ["Friction", "Gravity", "Magnetism", "Electric force"],
+          answer: 1
+        },
+        {
+          question: "Which state of matter has a fixed shape?",
+          options: ["Solid", "Liquid", "Gas", "Plasma"],
+          answer: 0
+        }
+      ],
+
+
+      social: [
+        {
+          question: "What is the capital city of Nepal?",
+          options: ["Pokhara", "Janakpur", "Kathmandu", "Biratnagar"],
+          answer: 2
+        },
+        {
+          question: "How many provinces are there in Nepal?",
+          options: ["5", "6", "7", "8"],
+          answer: 2
+        },
+        {
+          question: "Which is the highest mountain in the world?",
+          options: ["K2", "Mount Everest", "Kanchenjunga", "Makalu"],
+          answer: 1
+        },
+        {
+          question: "What is the national flower of Nepal?",
+          options: ["Rose", "Rhododendron", "Lotus", "Sunflower"],
+          answer: 1
+        },
+        {
+          question: "Which day is Constitution Day observed in Nepal?",
+          options: [
+            "Ashwin 3",
+            "Baisakh 1",
+            "Magh 1",
+            "Falgun 7"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which is the longest river of Nepal?",
+          options: ["Koshi", "Gandaki", "Karnali", "Bagmati"],
+          answer: 2
+        },
+        {
+          question: "What is the national animal of Nepal?",
+          options: ["Cow", "Tiger", "Rhino", "Yak"],
+          answer: 0
+        },
+        {
+          question: "Which continent is Nepal in?",
+          options: ["Europe", "Asia", "Africa", "Australia"],
+          answer: 1
+        },
+        {
+          question: "What is democracy based on?",
+          options: [
+            "People's participation",
+            "One person's rule",
+            "Military rule",
+            "No elections"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which is a fundamental right?",
+          options: [
+            "Right to equality",
+            "Right to pollute",
+            "Right to steal",
+            "Right to harm others"
+          ],
+          answer: 0
+        }
+      ],
+
+
+      computer: [
+        {
+          question: "What does CPU stand for?",
+          options: [
+            "Central Processing Unit",
+            "Computer Personal Unit",
+            "Central Program Utility",
+            "Control Processing User"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which device is used to type text?",
+          options: ["Monitor", "Keyboard", "Speaker", "Printer"],
+          answer: 1
+        },
+        {
+          question: "Which one is an operating system?",
+          options: ["Windows", "Google", "YouTube", "Facebook"],
+          answer: 0
+        },
+        {
+          question: "What is the full form of RAM?",
+          options: [
+            "Random Access Memory",
+            "Read Access Machine",
+            "Rapid Action Memory",
+            "Random Application Module"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which device displays information?",
+          options: ["Keyboard", "Monitor", "Mouse", "Scanner"],
+          answer: 1
+        },
+        {
+          question: "Which is an input device?",
+          options: ["Printer", "Monitor", "Keyboard", "Speaker"],
+          answer: 2
+        },
+        {
+          question: "What is used to browse websites?",
+          options: [
+            "Web browser",
+            "Calculator",
+            "Paint",
+            "Notepad"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which one is a search engine?",
+          options: ["Google", "Windows", "Word", "Excel"],
+          answer: 0
+        },
+        {
+          question: "What does WWW stand for?",
+          options: [
+            "World Wide Web",
+            "World Web Window",
+            "Web World Work",
+            "Wide World Word"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which is used to store files permanently?",
+          options: ["RAM", "Hard disk", "CPU", "Monitor"],
+          answer: 1
+        }
+      ],
+
+
+      health: [
+        {
+          question: "Which nutrient mainly helps in body building?",
+          options: ["Protein", "Water", "Minerals", "Fiber"],
+          answer: 0
+        },
+        {
+          question: "Which organ helps us breathe?",
+          options: ["Heart", "Lungs", "Stomach", "Kidney"],
+          answer: 1
+        },
+        {
+          question: "How many hours of sleep does a school-age child generally need?",
+          options: ["2–3", "4–5", "8–10", "15–18"],
+          answer: 2
+        },
+        {
+          question: "Which is important for maintaining good health?",
+          options: [
+            "Regular exercise",
+            "Skipping all meals",
+            "Avoiding water",
+            "Never sleeping"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which vitamin is commonly obtained from sunlight?",
+          options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"],
+          answer: 3
+        },
+        {
+          question: "What should we do before eating food?",
+          options: [
+            "Wash hands",
+            "Run outside",
+            "Sleep",
+            "Skip washing"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which activity improves physical fitness?",
+          options: ["Exercise", "Smoking", "Skipping sleep", "Overeating"],
+          answer: 0
+        },
+        {
+          question: "Why is clean drinking water important?",
+          options: [
+            "For good health",
+            "To make us sick",
+            "To reduce sleep",
+            "For pollution"
+          ],
+          answer: 0
+        },
+        {
+          question: "Which food group provides carbohydrates?",
+          options: ["Rice", "Salt", "Water", "Air"],
+          answer: 0
+        },
+        {
+          question: "Good hygiene helps prevent what?",
+          options: [
+            "Diseases",
+            "Learning",
+            "Growth",
+            "Exercise"
+          ],
+          answer: 0
+        }
+      ]
+
+    };
+
+
+    /* ================================
+       ELEMENTS
+    ================================= */
+
+    const yearElement =
+      document.getElementById("year");
+
+    const subjectGrid =
+      document.getElementById("subjectGrid");
+
+    const subjectSection =
+      document.getElementById("subjectSection");
 
     const quizSection =
       document.getElementById("quizSection");
@@ -263,34 +913,661 @@
     const quizResult =
       document.getElementById("quizResult");
 
-    const restartQuizBtn =
-      document.getElementById("restartQuizBtn");
+    const quizTitle =
+      document.getElementById("quizTitle");
 
-    startQuizBtn.addEventListener("click", () => {
+    const quizDescription =
+      document.getElementById("quizDescription");
 
-      quizSection.style.display = "block";
+    const questionNumber =
+      document.getElementById("questionNumber");
 
-      startQuizBtn.disabled = true;
+    const questionText =
+      document.getElementById("questionText");
+
+    const quizOptions =
+      document.getElementById("quizOptions");
+
+    const nextQuestionBtn =
+      document.getElementById("nextQuestionBtn");
+
+    const resultSubject =
+      document.getElementById("resultSubject");
+
+    const quizScore =
+      document.getElementById("quizScore");
+
+    const resultText =
+      document.getElementById("resultText");
+
+    const backToSubjectsBtn =
+      document.getElementById("backToSubjectsBtn");
+
+    const dateInfo =
+      document.getElementById("dateInfo");
+
+
+    yearElement.textContent =
+      new Date().getFullYear();
+
+
+    /* ================================
+       NEPAL DATE
+    ================================= */
+
+    function getNepalDate() {
+
+      const now = new Date();
+
+      const formatter =
+        new Intl.DateTimeFormat(
+          "en-CA",
+          {
+            timeZone: "Asia/Kathmandu",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
+          }
+        );
+
+      return formatter.format(now);
+    }
+
+
+    const today =
+      getNepalDate();
+
+
+    dateInfo.textContent =
+      "Daily quiz limit • Nepal date: " + today;
+
+
+    /* ================================
+       STORAGE
+    ================================= */
+
+    function getProgress() {
+
+      const saved =
+        localStorage.getItem(
+          "class8QuizProgress"
+        );
+
+      if (!saved) {
+
+        return {
+          date: today,
+          subjects: {}
+        };
+
+      }
+
+
+      try {
+
+        const data =
+          JSON.parse(saved);
+
+
+        if (data.date !== today) {
+
+          return {
+            date: today,
+            subjects: {}
+          };
+
+        }
+
+
+        if (!data.subjects) {
+          data.subjects = {};
+        }
+
+
+        return data;
+
+      } catch (error) {
+
+        return {
+          date: today,
+          subjects: {}
+        };
+
+      }
+
+    }
+
+
+    function saveProgress(progress) {
+
+      localStorage.setItem(
+        "class8QuizProgress",
+        JSON.stringify(progress)
+      );
+
+    }
+
+
+    function getSubjectCount(subjectKey) {
+
+      const progress =
+        getProgress();
+
+      return progress.subjects[subjectKey] || 0;
+
+    }
+
+
+    function increaseSubjectCount(subjectKey) {
+
+      const progress =
+        getProgress();
+
+      const current =
+        progress.subjects[subjectKey] || 0;
+
+      progress.subjects[subjectKey] =
+        Math.min(
+          DAILY_LIMIT,
+          current + 1
+        );
+
+      saveProgress(progress);
+
+    }
+
+
+    /* ================================
+       SUBJECT CARDS
+    ================================= */
+
+    function renderSubjects() {
+
+      subjectGrid.innerHTML = "";
+
+
+      let totalToday = 0;
+
+
+      Object.keys(SUBJECTS).forEach(
+        function(subjectKey) {
+
+          const subject =
+            SUBJECTS[subjectKey];
+
+          const count =
+            getSubjectCount(subjectKey);
+
+          totalToday += count;
+
+
+          const card =
+            document.createElement("div");
+
+          card.className =
+            "quiz-subject-card";
+
+
+          if (count >= DAILY_LIMIT) {
+
+            card.classList.add("locked");
+
+          }
+
+
+          card.innerHTML = `
+
+            <div class="quiz-subject-icon">
+              ${subject.icon}
+            </div>
+
+            <h3>
+              ${subject.name}
+            </h3>
+
+            <div class="quiz-progress">
+              ${count} / ${DAILY_LIMIT} completed today
+            </div>
+
+            ${
+              count >= DAILY_LIMIT
+                ? "<div class='quiz-progress'>🔒 Completed</div>"
+                : "<div class='quiz-progress'>Start Quiz →</div>"
+            }
+
+          `;
+
+
+          if (count < DAILY_LIMIT) {
+
+            card.addEventListener(
+              "click",
+              function() {
+
+                startSubjectQuiz(
+                  subjectKey
+                );
+
+              }
+            );
+
+          }
+
+
+          subjectGrid.appendChild(card);
+
+        }
+      );
+
+
+      const overallLimitMessage =
+        document.getElementById(
+          "overallLimitMessage"
+        );
+
+
+      if (totalToday >= 70) {
+
+        overallLimitMessage.style.display =
+          "block";
+
+        overallLimitMessage.textContent =
+          "🎉 You have completed the maximum 70 questions for today. Come back tomorrow!";
+
+      } else {
+
+        overallLimitMessage.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* ================================
+       QUIZ STATE
+    ================================= */
+
+    let currentSubject = null;
+
+    let currentQuestions = [];
+
+    let currentQuestionIndex = 0;
+
+    let currentScore = 0;
+
+    let answerSelected = false;
+
+
+    /* ================================
+       START SUBJECT QUIZ
+    ================================= */
+
+    function startSubjectQuiz(subjectKey) {
+
+      const count =
+        getSubjectCount(subjectKey);
+
+
+      if (count >= DAILY_LIMIT) {
+
+        alert(
+          "You have already completed 10 questions from this subject today."
+        );
+
+        return;
+
+      }
+
+
+      currentSubject =
+        subjectKey;
+
+
+      const remaining =
+        DAILY_LIMIT - count;
+
+
+      currentQuestions =
+        QUESTION_BANK[subjectKey]
+          .slice(0, remaining);
+
+
+      currentQuestionIndex = 0;
+
+      currentScore = 0;
+
+      answerSelected = false;
+
+
+      subjectSection.style.display =
+        "none";
+
+      quizResult.style.display =
+        "none";
+
+      quizSection.style.display =
+        "block";
+
+
+      quizTitle.textContent =
+        SUBJECTS[subjectKey].name;
+
+
+      quizDescription.textContent =
+        "Answer each question carefully. Questions completed today: " +
+        count +
+        " / " +
+        DAILY_LIMIT;
+
 
       quizSection.scrollIntoView({
         behavior: "smooth"
       });
 
-    });
 
-    restartQuizBtn.addEventListener("click", () => {
+      showQuestion();
 
-      quizResult.style.display = "none";
+    }
 
-      quizSection.style.display = "block";
 
-      quizSection.scrollIntoView({
+    /* ================================
+       SHOW QUESTION
+    ================================= */
+
+    function showQuestion() {
+
+      const question =
+        currentQuestions[
+          currentQuestionIndex
+        ];
+
+
+      answerSelected = false;
+
+
+      questionNumber.textContent =
+        "Question " +
+        (currentQuestionIndex + 1) +
+        " of " +
+        currentQuestions.length;
+
+
+      questionText.textContent =
+        question.question;
+
+
+      quizOptions.innerHTML =
+        "";
+
+
+      question.options.forEach(
+        function(option, index) {
+
+          const button =
+            document.createElement("button");
+
+          button.type =
+            "button";
+
+          button.className =
+            "quiz-option";
+
+          button.textContent =
+            option;
+
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              selectAnswer(
+                index,
+                button
+              );
+
+            }
+          );
+
+
+          quizOptions.appendChild(
+            button
+          );
+
+        }
+      );
+
+
+      nextQuestionBtn.disabled =
+        true;
+
+
+      if (
+        currentQuestionIndex ===
+        currentQuestions.length - 1
+      ) {
+
+        nextQuestionBtn.textContent =
+          "Finish Quiz";
+
+      } else {
+
+        nextQuestionBtn.textContent =
+          "Next Question";
+
+      }
+
+    }
+
+
+    /* ================================
+       SELECT ANSWER
+    ================================= */
+
+    function selectAnswer(
+      selectedIndex,
+      selectedButton
+    ) {
+
+      if (answerSelected) {
+        return;
+      }
+
+
+      answerSelected = true;
+
+
+      const question =
+        currentQuestions[
+          currentQuestionIndex
+        ];
+
+
+      const allButtons =
+        quizOptions.querySelectorAll(
+          ".quiz-option"
+        );
+
+
+      allButtons.forEach(
+        function(button, index) {
+
+          button.disabled = true;
+
+
+          if (
+            index === question.answer
+          ) {
+
+            button.classList.add(
+              "correct"
+            );
+
+          }
+
+        }
+      );
+
+
+      if (
+        selectedIndex ===
+        question.answer
+      ) {
+
+        currentScore++;
+
+        selectedButton.classList.add(
+          "correct"
+        );
+
+      } else {
+
+        selectedButton.classList.add(
+          "wrong"
+        );
+
+      }
+
+
+      increaseSubjectCount(
+        currentSubject
+      );
+
+
+      nextQuestionBtn.disabled =
+        false;
+
+    }
+
+
+    /* ================================
+       NEXT QUESTION
+    ================================= */
+
+    nextQuestionBtn.addEventListener(
+      "click",
+      function() {
+
+        if (!answerSelected) {
+          return;
+        }
+
+
+        if (
+          currentQuestionIndex <
+          currentQuestions.length - 1
+        ) {
+
+          currentQuestionIndex++;
+
+          showQuestion();
+
+        } else {
+
+          finishQuiz();
+
+        }
+
+      }
+    );
+
+
+    /* ================================
+       FINISH
+    ================================= */
+
+    function finishQuiz() {
+
+      quizSection.style.display =
+        "none";
+
+      quizResult.style.display =
+        "block";
+
+
+      const completed =
+        currentQuestions.length;
+
+
+      quizScore.textContent =
+        currentScore +
+        " / " +
+        completed;
+
+
+      resultSubject.textContent =
+        SUBJECTS[currentSubject].name;
+
+
+      const totalCompleted =
+        getSubjectCount(
+          currentSubject
+        );
+
+
+      if (
+        totalCompleted >=
+        DAILY_LIMIT
+      ) {
+
+        resultText.textContent =
+          "🎉 You completed all 10 questions for " +
+          SUBJECTS[currentSubject].name +
+          " today. This subject is now locked until the next Nepal calendar day.";
+
+      } else {
+
+        resultText.textContent =
+          "Great work! You have completed " +
+          totalCompleted +
+          " of 10 questions for this subject today.";
+
+      }
+
+
+      quizResult.scrollIntoView({
         behavior: "smooth"
       });
 
-    });
+    }
+
+
+    /* ================================
+       BACK TO SUBJECTS
+    ================================= */
+
+    backToSubjectsBtn.addEventListener(
+      "click",
+      function() {
+
+        quizResult.style.display =
+          "none";
+
+        quizSection.style.display =
+          "none";
+
+        subjectSection.style.display =
+          "block";
+
+
+        renderSubjects();
+
+
+        subjectSection.scrollIntoView({
+          behavior: "smooth"
+        });
+
+      }
+    );
+
+
+    /* ================================
+       INITIAL LOAD
+    ================================= */
+
+    renderSubjects();
+
   </script>
 
 </body>
 </html>
-```
