@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,19 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="icon" type="image/png" href="favicon.png">
-  
+
   <title>Class 8 Learning Hub</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+
   <header class="site-header">
+
     <a class="brand" href="#home" aria-label="Class 8 Learning Hub home">
       <span class="brand-mark">8</span>
-      <span><strong data-i18n="brand">Class 8</strong><small data-i18n="tagline">Learn · Grow · Shine</small></span>
+
+      <span>
+        <strong data-i18n="brand">Class 8</strong>
+        <small data-i18n="tagline">Learn · Grow · Shine</small>
+      </span>
     </a>
+
 
     <nav aria-label="Main navigation">
       <a href="#home" data-i18n="navHome">Home</a>
@@ -25,33 +40,65 @@
       <a href="#notice" data-i18n="navNotices">Notices</a>
     </nav>
 
-    <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch language">नेपाली</button>
+
+    <button
+      id="languageToggle"
+      class="language-toggle"
+      type="button"
+      aria-label="Switch language"
+    >
+      नेपाली
+    </button>
+
   </header>
+
 
   <main>
 
+    <!-- HERO -->
     <section id="home" class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow" data-i18n="eyebrow">WELCOME TO OUR DIGITAL CLASSROOM</p>
 
-        <h1 data-i18n="heroTitle">A brighter way to learn, every day.</h1>
+      <div class="hero-copy">
+
+        <p class="eyebrow" data-i18n="eyebrow">
+          WELCOME TO OUR DIGITAL CLASSROOM
+        </p>
+
+        <h1 data-i18n="heroTitle">
+          A brighter way to learn, every day.
+        </h1>
 
         <p class="hero-text" data-i18n="heroText">
           Your home for lessons, important updates, weekly plans, and a little extra motivation.
         </p>
 
+
         <div class="hero-actions">
-          <a class="button button-primary" href="#subjects" data-i18n="explore">
+
+          <a
+            class="button button-primary"
+            href="#subjects"
+            data-i18n="explore"
+          >
             Explore subjects
           </a>
 
-          <a class="button button-light" href="quiz.html">
+
+          <!-- QUIZ BUTTON -->
+          <a
+            class="button button-light"
+            href="quiz.html"
+          >
             Quiz
           </a>
+
         </div>
+
       </div>
 
+
       <div class="hero-card">
+
         <span class="spark spark-one">✦</span>
         <span class="spark spark-two">✦</span>
 
@@ -63,15 +110,23 @@
         <div class="hill hill-back"></div>
         <div class="hill hill-front"></div>
 
+
         <div class="mini-note">
           <span>✏</span>
-          <b data-i18n="quote">Small steps make big progress.</b>
+
+          <b data-i18n="quote">
+            Small steps make big progress.
+          </b>
         </div>
+
       </div>
+
     </section>
 
 
+    <!-- QUICK STATS -->
     <section class="quick-stats" aria-label="Class highlights">
+
       <article>
         <span>7</span>
         <p data-i18n="statSubjects">Core subjects</p>
@@ -86,93 +141,147 @@
         <span>∞</span>
         <p data-i18n="statPossibilities">Possibilities</p>
       </article>
+
     </section>
 
 
+    <!-- SUBJECTS -->
     <section id="subjects" class="section">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="learnBy">LEARN BY SUBJECT</p>
 
-        <h2 data-i18n="subjectsTitle">What are we learning?</h2>
+      <div class="section-heading">
+
+        <p class="eyebrow" data-i18n="learnBy">
+          LEARN BY SUBJECT
+        </p>
+
+        <h2 data-i18n="subjectsTitle">
+          What are we learning?
+        </h2>
 
         <p data-i18n="subjectsText">
           Choose a subject to focus your study time.
         </p>
+
       </div>
+
 
       <div class="subject-grid">
 
+
+        <!-- ENGLISH -->
         <article
           class="subject-card english"
           data-page="english.html"
           tabindex="0"
           role="link"
         >
+
           <div class="subject-icon">Aa</div>
 
-          <h3 data-i18n="english">English</h3>
+          <h3 data-i18n="english">
+            English
+          </h3>
 
           <p data-i18n="englishDesc">
             Read, write and express yourself.
           </p>
 
-          <a href="english.html" data-i18n="viewResources">
+          <a
+            href="english.html"
+            data-i18n="viewResources"
+          >
             View resources →
           </a>
+
         </article>
 
 
+        <!-- SCIENCE -->
         <article
           class="subject-card science"
           data-page="science.html"
           tabindex="0"
           role="link"
         >
+
           <div class="subject-icon">⚗</div>
 
-          <h3 data-i18n="science">Science</h3>
+          <h3 data-i18n="science">
+            Science
+          </h3>
 
           <p data-i18n="scienceDesc">
             Explore how the world works.
           </p>
 
-          <a href="science.html" data-i18n="viewResources">
+          <a
+            href="science.html"
+            data-i18n="viewResources"
+          >
             View resources →
           </a>
+
         </article>
 
+
       </div>
+
     </section>
 
 
+    <!-- NOTICE BOARD -->
     <section id="notice" class="notice-band">
-      <div>
-        <p class="eyebrow" data-i18n="stayCurrent">STAY CURRENT</p>
 
-        <h2 data-i18n="noticeTitle">Notice board</h2>
+      <div>
+
+        <p class="eyebrow" data-i18n="stayCurrent">
+          STAY CURRENT
+        </p>
+
+        <h2 data-i18n="noticeTitle">
+          Notice board
+        </h2>
+
       </div>
 
-      <div class="notice-list" id="noticeList"></div>
+
+      <div
+        class="notice-list"
+        id="noticeList"
+      ></div>
+
     </section>
 
 
+    <!-- REVIEWS -->
     <section class="reviews-section">
 
       <div class="reviews-header">
-        <p class="eyebrow">SHARE YOUR EXPERIENCE</p>
 
-        <h2>⭐ Rate Our Website</h2>
+        <p class="eyebrow">
+          SHARE YOUR EXPERIENCE
+        </p>
+
+        <h2>
+          ⭐ Rate Our Website
+        </h2>
 
         <p>
           Tell us what you think about Class 8 Learning Hub.
         </p>
+
       </div>
 
 
       <div class="review-summary">
 
+
         <div class="rating-summary">
-          <div class="big-rating" id="averageRating">
+
+          <div
+            class="big-rating"
+            id="averageRating"
+          >
             0.0/5
           </div>
 
@@ -180,26 +289,42 @@
             ★★★★★
           </div>
 
-          <p>Average Rating</p>
+          <p>
+            Average Rating
+          </p>
+
         </div>
 
 
         <div class="review-count">
-          <div class="big-count" id="totalReviews">
+
+          <div
+            class="big-count"
+            id="totalReviews"
+          >
             0
           </div>
 
-          <p>Total Reviews</p>
+          <p>
+            Total Reviews
+          </p>
+
         </div>
+
 
       </div>
 
 
+      <!-- REVIEW FORM -->
       <div class="review-form-box">
 
-        <h3>Give Your Review</h3>
+        <h3>
+          Give Your Review
+        </h3>
+
 
         <form id="reviewForm">
+
 
           <label for="reviewName">
             Your Name
@@ -211,17 +336,19 @@
             placeholder="Enter your name"
             maxlength="50"
             required
-          >
+          />
 
 
           <label>
             Choose Your Rating
           </label>
 
+
           <div
             class="rating-stars"
             aria-label="Choose rating"
           >
+
             <button
               type="button"
               class="rating-star"
@@ -261,18 +388,20 @@
             >
               ☆
             </button>
+
           </div>
 
 
           <input
             type="hidden"
             id="reviewRating"
-          >
+          />
 
 
           <label for="reviewComment">
             Your Review
           </label>
+
 
           <textarea
             id="reviewComment"
@@ -289,16 +418,20 @@
             Submit Review
           </button>
 
+
         </form>
 
       </div>
 
 
+      <!-- VISITOR REVIEWS -->
       <div class="visitor-reviews-box">
 
         <div class="visitor-reviews-title">
 
-          <h3>⭐ Visitor Reviews</h3>
+          <h3>
+            ⭐ Visitor Reviews
+          </h3>
 
           <p>
             Reviews shared by visitors of our website.
@@ -308,36 +441,51 @@
 
 
         <div id="visitorReviews">
-          <p>Loading reviews...</p>
+
+          <p>
+            Loading reviews...
+          </p>
+
         </div>
 
       </div>
+
 
     </section>
 
   </main>
 
 
+  <!-- FOOTER -->
   <footer>
+
     <span>
-      © <span id="year"></span>
+      ©
+      <span id="year"></span>
+
       <span data-i18n="footer">
         Class 8 Learning Hub
       </span>
     </span>
 
+
     <span data-i18n="footerMessage">
       Made for curious minds.
     </span>
+
   </footer>
 
 
+  <!-- MAIN SCRIPT -->
   <script src="script.js"></script>
 
+
+  <!-- FIREBASE REVIEW -->
   <script
     type="module"
     src="firebase-review.js"
   ></script>
+
 
   <script
     type="module"
@@ -346,3 +494,4 @@
 
 </body>
 </html>
+```
