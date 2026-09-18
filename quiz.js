@@ -346,7 +346,7 @@ const questionBanks = {
     { q: "What is 2/5 as a decimal?", options: ["0.2", "0.4", "0.5", "0.25"], answer: 1 },
     { q: "What is 50% as a fraction?", options: ["1/2", "1/4", "2/5", "3/4"], answer: 0 },
     { q: "What is 10% of 500?", options: ["5", "10", "50", "100"], answer: 2 }
-  ]
+  ],
 
   // ==========================================================
   // SOCIAL STUDIES — 100 QUESTIONS
