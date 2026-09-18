@@ -351,7 +351,7 @@ const questionBanks = {
   // ==========================================================
   // SOCIAL STUDIES — 100 QUESTIONS
   // ==========================================================
-  social studies: [
+  social: [
 
     { q: "What is the capital city of Nepal?", options: ["Pokhara", "Kathmandu", "Biratnagar", "Janakpur"], answer: 1 },
     { q: "How many provinces are there in Nepal?", options: ["5", "6", "7", "8"], answer: 2 },
